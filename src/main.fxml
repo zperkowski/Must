@@ -4,14 +4,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainControler">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
    <top>
       <MenuBar id="menuBar" BorderPane.alignment="CENTER">
         <menus>
           <Menu id="fileMenu" mnemonicParsing="false" text="File">
             <items>
-              <MenuItem id="menuItemClose" mnemonicParsing="false" text="Close" />
+              <MenuItem id="menuFileClose" mnemonicParsing="false" onAction="#closeApp" text="Close" />
             </items>
           </Menu>
           <Menu id="fileEdit" mnemonicParsing="false" text="Edit">
@@ -21,7 +20,7 @@
           </Menu>
           <Menu id="fileHelp" mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem id="fileHelpAbout" mnemonicParsing="false" text="About" />
+              <MenuItem id="fileHelpAbout" mnemonicParsing="false" onAction="#showAbout" text="About" />
             </items>
           </Menu>
         </menus>
