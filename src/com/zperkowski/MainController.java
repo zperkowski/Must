@@ -1,5 +1,8 @@
+package com.zperkowski;
+
 /**
- * Created by zperkowski on 20/12/2016.
+ * This class is a controller for the main window.
+ * The main window layout is set in main.fxml.
  */
 public class MainController {
 

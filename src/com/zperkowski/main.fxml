@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zperkowski.MainController">
+   <top>
+      <MenuBar id="menuBar" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu id="fileMenu" mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem disable="true" mnemonicParsing="false" text="New" />
+                  <MenuItem disable="true" mnemonicParsing="false" text="Save..." />
+                  <MenuItem disable="true" mnemonicParsing="false" text="Open..." />
+                  <SeparatorMenuItem disable="true" mnemonicParsing="false" />
+              <MenuItem id="menuFileClose" mnemonicParsing="false" onAction="#closeApp" text="Close" />
+            </items>
+          </Menu>
+          <Menu id="fileEdit" mnemonicParsing="false" text="Edit">
+            <items>
+                  <MenuItem disable="true" mnemonicParsing="false" text="Add..." />
+                  <RadioMenuItem disable="true" mnemonicParsing="false" text="Edit..." />
+              <MenuItem id="menuEditDuplicate" disable="true" mnemonicParsing="false" text="Duplicate" />
+                  <MenuItem disable="true" mnemonicParsing="false" text="Remove" />
+            </items>
+          </Menu>
+          <Menu id="fileHelp" mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem id="fileHelpAbout" mnemonicParsing="false" onAction="#showAbout" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab id="tabProducts" closable="false" text="Products">
+               <content>
+                  <SplitPane id="tabProductsSplit" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+                    <items>
+                        <TreeView id="tabProductsSplitTree" prefHeight="338.0" prefWidth="170.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="385.0" />
+                    </items>
+                  </SplitPane>
+               </content>
+          </Tab>
+          <Tab id="tabSevices" closable="false" text="Sevices">
+               <content>
+                  <SplitPane id="tabSevicesSplit" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+                    <items>
+                        <TreeView id="tabSevicesSplitTree" prefHeight="200.0" prefWidth="200.0" />
+                      <AnchorPane id="tabSevicesSplitRight" minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="182.0" />
+                    </items>
+                  </SplitPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
+         <items>
+            <TextField id="searchTextField" disable="true" />
+            <Button id="searchButton" disable="true" mnemonicParsing="false" text="Search" />
+         </items>
+      </SplitPane>
+   </bottom>
+</BorderPane>
