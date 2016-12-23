@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 class Product {
     private BigDecimal price;
-    private int discount;
     private String description;
 
     public BigDecimal getPrice() {
@@ -13,14 +12,6 @@ class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
-        this.discount = discount;
     }
 
     public String getDescription() {
@@ -45,12 +36,21 @@ class Service extends Product {
 }
 
 class Instrument extends Product {
+    private int discount;
     private float weight;
     private String brand;
     private String model;
     private int guaranteeInMonths;
     private String type;
     private boolean isDigital;
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
 
     public float getWeight() {
         return weight;
