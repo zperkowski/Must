@@ -1,4 +1,4 @@
-package com.zperkowski;
+package com.zperkowski.Must;
 
 import javafx.scene.control.Alert;
 

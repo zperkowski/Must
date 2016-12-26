@@ -1,4 +1,4 @@
-package com.zperkowski;
+package com.zperkowski.Must;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +27,8 @@ public class Must extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Music Store");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setMinWidth(600);
+        primaryStage.setMinHeight(450);
         primaryStage.show();
     }
 }

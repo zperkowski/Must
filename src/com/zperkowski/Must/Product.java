@@ -1,10 +1,19 @@
-package com.zperkowski;
+package com.zperkowski.Must;
 
 import java.math.BigDecimal;
 
 class Product {
+    private String name;
     private BigDecimal price;
     private String description;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public BigDecimal getPrice() {
         return price;

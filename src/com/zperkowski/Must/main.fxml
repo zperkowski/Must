@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zperkowski.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zperkowski.Must.MainController">
    <top>
       <MenuBar id="menuBar" BorderPane.alignment="CENTER">
         <menus>
@@ -20,7 +20,7 @@
           </Menu>
           <Menu id="fileEdit" mnemonicParsing="false" text="Edit">
             <items>
-                  <MenuItem disable="true" mnemonicParsing="false" text="Add..." />
+                  <MenuItem mnemonicParsing="false" onAction="#displayModifier" text="Add..." />
                   <RadioMenuItem disable="true" mnemonicParsing="false" text="Edit..." />
               <MenuItem id="menuEditDuplicate" disable="true" mnemonicParsing="false" text="Duplicate" />
                   <MenuItem disable="true" mnemonicParsing="false" text="Remove" />
@@ -64,7 +64,7 @@
       <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
          <items>
             <TextField id="searchTextField" disable="true" />
-            <Button id="searchButton" disable="true" mnemonicParsing="false" text="Search" />
+            <Button id="searchButton" disable="true" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" prefWidth="70.0" text="Search" />
          </items>
       </SplitPane>
    </bottom>
