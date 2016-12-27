@@ -51,6 +51,7 @@
                                   promptText="Choose an instrument...">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Service"/>
                                     <String fx:value="Product"/>
                                     <String fx:value="Instrument"/>
                                     <String fx:value="Guitar"/>
@@ -67,51 +68,63 @@
                             </value>
                         </ComboBox>
                         <Label text="Duration" GridPane.columnIndex="2"/>
-                        <TextField fx:id="textDuration" promptText="In hours" GridPane.columnIndex="3"/>
+                        <TextField fx:id="textDuration" disable="true" promptText="In hours" GridPane.columnIndex="3"/>
                         <Label text="Name" GridPane.rowIndex="1"/>
                         <TextField fx:id="textName" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                         <Label text="Price" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
                         <TextField fx:id="textPrice" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
                         <Label text="Brand" GridPane.rowIndex="2"/>
-                        <TextField fx:id="textBrand" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <TextField fx:id="textBrand" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                         <Label text="Model" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-                        <TextField fx:id="textModel" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                        <TextField fx:id="textModel" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
                         <Label text="Type" GridPane.rowIndex="3"/>
-                        <ComboBox fx:id="comboType" prefWidth="Infinity" GridPane.columnIndex="1"
-                                  GridPane.rowIndex="3"/>
+                        <ComboBox fx:id="comboType" disable="true" prefWidth="Infinity" GridPane.columnIndex="1"
+                                  GridPane.rowIndex="3">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Classic"/>
+                                    <String fx:value="Acoustic"/>
+                                    <String fx:value="Bass"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
                         <Label text="Weight" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-                        <TextField fx:id="textWeight" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                        <TextField fx:id="textWeight" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
                         <Label text="Guarantee" GridPane.rowIndex="4"/>
-                        <TextField fx:id="textGuarantee" promptText="in months" GridPane.columnIndex="1"
+                        <TextField fx:id="textGuarantee" disable="true" promptText="in months" GridPane.columnIndex="1"
                                    GridPane.rowIndex="4"/>
-                        <CheckBox fx:id="checkDigital" mnemonicParsing="false" text="Is digital?"
+                        <CheckBox fx:id="checkDigital" disable="true" mnemonicParsing="false" text="Is digital?"
                                   GridPane.columnIndex="2" GridPane.rowIndex="4"/>
-                        <CheckBox fx:id="checkIsSetComplete" mnemonicParsing="false" text="Is the set complete?"
-                                  GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+                        <CheckBox fx:id="checkIsSetComplete" disable="true" mnemonicParsing="false"
+                                  text="Is the set complete?" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
                         <Label text="Discount" GridPane.rowIndex="5"/>
-                        <TextField fx:id="textDiscount" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        <TextField fx:id="textDiscount" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
                         <Label text="Strings" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
-                        <TextField fx:id="textStrings" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+                        <TextField fx:id="textStrings" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
                         <Label text="Frets" GridPane.rowIndex="6"/>
-                        <TextField fx:id="textFrets" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                        <TextField fx:id="textFrets" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
                         <Label text="Keys" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
-                        <TextField fx:id="textKeys" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+                        <TextField fx:id="textKeys" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
                         <Label text="Mininal bandwidth" GridPane.rowIndex="7"/>
-                        <TextField fx:id="textMinBandwidth" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                        <TextField fx:id="textMinBandwidth" disable="true" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="7"/>
                         <Label text="Maximal bandwidth" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
-                        <TextField fx:id="textMaxBandwidth" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+                        <TextField fx:id="textMaxBandwidth" disable="true" GridPane.columnIndex="3"
+                                   GridPane.rowIndex="7"/>
                         <Label text="Impedance" GridPane.rowIndex="8"/>
-                        <TextField fx:id="textImpedance" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                        <TextField fx:id="textImpedance" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
                         <Label text="RMS" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
-                        <TextField fx:id="textRMS" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
+                        <TextField fx:id="textRMS" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
                         <Label text="Sensitivity" GridPane.rowIndex="9"/>
-                        <TextField fx:id="textSensitivity" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+                        <TextField fx:id="textSensitivity" disable="true" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="9"/>
                         <Label text="Maximal power" GridPane.columnIndex="2" GridPane.rowIndex="9"/>
-                        <TextField fx:id="textMaxPower" GridPane.columnIndex="3" GridPane.rowIndex="9"/>
+                        <TextField fx:id="textMaxPower" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="9"/>
                         <Label text="Channels" GridPane.rowIndex="10"/>
-                        <TextField fx:id="textChannels" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
+                        <TextField fx:id="textChannels" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
                         <Label text="Bits of processor" GridPane.columnIndex="2" GridPane.rowIndex="10"/>
-                        <TextField fx:id="textBitsOfProcessor" GridPane.columnIndex="3" GridPane.rowIndex="10"/>
+                        <TextField fx:id="textBitsOfProcessor" disable="true" GridPane.columnIndex="3"
+                                   GridPane.rowIndex="10"/>
                     </children>
                     <opaqueInsets>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>

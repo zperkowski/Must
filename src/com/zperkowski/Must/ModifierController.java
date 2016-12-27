@@ -17,6 +17,8 @@ public class ModifierController {
     public TextField textName;
     public TextField textPrice;
     public TextField textBrand;
+    public TextField textModel;
+    public TextField textGuarantee;
     public ComboBox comboType;
     public TextField textWeight;
     public CheckBox checkDigital;
@@ -37,7 +39,64 @@ public class ModifierController {
 
 
     public void updateModifier() {
+        setAllDisabled();
         switch ((String) comboProductChooser.getValue()) {
+            case "Service":
+                activateProduct();
+                activateService();
+                break;
+            case "Product":
+                activateProduct();
+                break;
+            case "Instrument":
+                activateProduct();
+                activateInstrument();
+                break;
+            case "Guitar":
+                activateProduct();
+                activateInstrument();
+                activateGuitar();
+                break;
+            case "Keyboard":
+                activateProduct();
+                activateInstrument();
+                activateKeyboard();
+                break;
+            case "Percussion":
+                activateProduct();
+                activateInstrument();
+                activatePercussion();
+                break;
+            case "Sound system":
+                activateProduct();
+                activateInstrument();
+                activateSoundSystem();
+                break;
+            case "Speakers":
+                activateProduct();
+                activateInstrument();
+                activateSoundSystem();
+                activateSpeaker();
+                break;
+            case "Mic":
+                activateProduct();
+                activateInstrument();
+                activateSoundSystem();
+                activateMic();
+                break;
+            case "Console":
+                activateProduct();
+                activateInstrument();
+                activateConsoles();
+                break;
+        }
+    }
+
+    public void doneButtonClicked() {
+        switch ((String) comboProductChooser.getValue()) {
+            case "Service":
+
+                break;
             case "Product":
 
                 break;
@@ -68,35 +127,83 @@ public class ModifierController {
         }
     }
 
-    public void doneButtonClicked() {
-        switch ((String) comboProductChooser.getValue()) {
-            case "Product":
+    /**
+     * Sets all controls to disabled mode.
+     */
+    private void setAllDisabled() {
+        textDuration.setDisable(true);
+        textName.setDisable(true);
+        textPrice.setDisable(true);
+        textBrand.setDisable(true);
+        comboType.setDisable(true);
+        textWeight.setDisable(true);
+        checkDigital.setDisable(true);
+        checkIsSetComplete.setDisable(true);
+        textDiscount.setDisable(true);
+        textStrings.setDisable(true);
+        textFrets.setDisable(true);
+        textKeys.setDisable(true);
+        textMinBandwidth.setDisable(true);
+        textMaxBandwidth.setDisable(true);
+        textImpedance.setDisable(true);
+        textRMS.setDisable(true);
+        textSensitivity.setDisable(true);
+        textMaxPower.setDisable(true);
+        textChannels.setDisable(true);
+        textBitsOfProcessor.setDisable(true);
+        textDescription.setDisable(true);
+    }
 
-                break;
-            case "Instrument":
+    private void activateProduct() {
+        textName.setDisable(false);
+        textPrice.setDisable(false);
+        textDescription.setDisable(false);
+    }
 
-                break;
-            case "Guitar":
+    private void activateService() {
+        textDuration.setDisable(false);
+    }
 
-                break;
-            case "Keyboard":
+    private void activateInstrument() {
+        textDiscount.setDisable(false);
+        textWeight.setDisable(false);
+        textBrand.setDisable(false);
+        textModel.setDisable(false);
+        textGuarantee.setDisable(false);
+        checkDigital.setDisable(false);
+    }
 
-                break;
-            case "Percussion":
+    private void activateGuitar() {
+        textStrings.setDisable(false);
+        textFrets.setDisable(false);
+        comboType.setDisable(false);
+    }
 
-                break;
-            case "Sound system":
+    private void activateKeyboard() {
+        textKeys.setDisable(false);
+    }
 
-                break;
-            case "Speakers":
+    private void activatePercussion() {
+        checkIsSetComplete.setDisable(false);
+    }
 
-                break;
-            case "Mic":
+    private void activateSoundSystem() {
+        textMinBandwidth.setDisable(false);
+        textMaxBandwidth.setDisable(false);
+    }
 
-                break;
-            case "Console":
+    private void activateSpeaker() {
+        textRMS.setDisable(false);
+        textImpedance.setDisable(false);
+    }
 
-                break;
-        }
+    private void activateMic() {
+        textSensitivity.setDisable(false);
+    }
+
+    private void activateConsoles() {
+        textMaxPower.setDisable(false);
+        textChannels.setDisable(false);
+        textBitsOfProcessor.setDisable(false);
     }
 }

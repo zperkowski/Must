@@ -50,7 +50,6 @@ class Instrument extends Product {
     private String brand;
     private String model;
     private int guaranteeInMonths;
-    private String type;
     private boolean isDigital;
 
     public int getDiscount() {
@@ -93,14 +92,6 @@ class Instrument extends Product {
         this.guaranteeInMonths = guaranteeInMonths;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public boolean isDigital() {
         return isDigital;
     }
@@ -113,6 +104,7 @@ class Instrument extends Product {
 class Guitar extends Instrument {
     private int strings;
     private int frets;
+    private String type;
 
     public int getStrings() {
         return strings;
@@ -128,6 +120,14 @@ class Guitar extends Instrument {
 
     public void setFrets(int frets) {
         this.frets = frets;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
 
