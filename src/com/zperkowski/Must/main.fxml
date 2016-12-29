@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -20,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zperkowski.Must.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zperkowski.Must.MainController">
    <top>
       <MenuBar id="menuBar" BorderPane.alignment="CENTER">
         <menus>
@@ -61,19 +62,111 @@
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
+                           <Label fx:id="titleProduct" prefWidth="Infinity" text="Title">
+                              <font>
+                                 <Font size="31.0" />
+                              </font>
+                           </Label>
+                            <GridPane alignment="CENTER" hgap="10.0" minHeight="-Infinity" minWidth="-Infinity" vgap="10.0">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                <children>
+                                    <Label text="Name" />
+                                    <TextField fx:id="textProductName" editable="false" GridPane.columnIndex="1" />
+                                    <Label text="Price" GridPane.columnIndex="2" />
+                                    <TextField fx:id="textProductPrice" editable="false" GridPane.columnIndex="3" />
+                                    <Label text="Brand" GridPane.rowIndex="1" />
+                                    <TextField fx:id="textProductBrand" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="Model" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <TextField fx:id="textProductModel" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <Label text="Type" GridPane.rowIndex="2" />
+                                    <TextField fx:id="textProductType" editable="false" layoutX="125.0" layoutY="58.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="Weight" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="textProductWeight" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                    <Label text="Guarantee" GridPane.rowIndex="3" />
+                                    <TextField fx:id="textProductGuarantee" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <CheckBox fx:id="checkProductDigital" disable="true" mnemonicParsing="false" text="Is digital?" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <CheckBox fx:id="checkProductIsSetComplete" disable="true" mnemonicParsing="false" text="Is the set complete?" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                    <Label text="Discount" GridPane.rowIndex="4" />
+                                    <TextField fx:id="textProductDiscount" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="Strings" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <TextField fx:id="textProductStrings" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                    <Label text="Frets" GridPane.rowIndex="5" />
+                                    <TextField fx:id="textProductFrets" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label text="Keys" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                    <TextField fx:id="textProductKeys" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                    <Label text="Mininal bandwidth" GridPane.rowIndex="6" />
+                                    <TextField fx:id="textProductMinBandwidth" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label text="Maximal bandwidth" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                    <TextField fx:id="textProductMaxBandwidth" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                    <Label text="Impedance" GridPane.rowIndex="7" />
+                                    <TextField fx:id="textProductImpedance" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <Label text="RMS" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                    <TextField fx:id="textProductRMS" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                    <Label text="Sensitivity" GridPane.rowIndex="8" />
+                                    <TextField fx:id="textProductSensitivity" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                    <Label text="Maximal power" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                    <TextField fx:id="textProductMaxPower" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                    <Label text="Channels" GridPane.rowIndex="9" />
+                                    <TextField fx:id="textProductChannels" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                    <Label text="Bits of processor" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                    <TextField fx:id="textProductBitsOfProcessor" disable="true" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                </children>
+                                <opaqueInsets>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                </opaqueInsets>
+                                <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                </padding>
+                            </GridPane>
+                           <GridPane hgap="10.0" prefHeight="300.0" vgap="10.0">
+                             <columnConstraints>
+                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                             </columnConstraints>
+                             <rowConstraints>
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                             </rowConstraints>
+                              <VBox.margin>
+                                 <Insets />
+                              </VBox.margin>
+                              <padding>
+                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              </padding>
+                              <children>
+                                 <Label text="Description" />
+                                 <TextField fx:id="textProductDescription" editable="false" minHeight="50.0" prefHeight="Infinity" GridPane.columnIndex="1" />
+                              </children>
+                           </GridPane>
                         </VBox>
                     </items>
                   </SplitPane>
                </content>
           </Tab>
-          <Tab id="tabSevices" closable="false" text="Sevices">
+          <Tab id="tabServices" closable="false" text="Services">
                <content>
-                  <SplitPane id="tabSevicesSplit" dividerPositions="0.29" prefHeight="160.0" prefWidth="200.0">
+                  <SplitPane id="tabServicesSplit" dividerPositions="0.29" prefHeight="160.0" prefWidth="200.0">
                     <items>
-                        <TreeView id="tabSevicesSplitTree" prefHeight="200.0" prefWidth="200.0" />
+                        <TreeView id="tabServicesSplitTree" prefHeight="200.0" prefWidth="200.0" />
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label prefWidth="Infinity" text="Title" textAlignment="CENTER">
+                              <Label fx:id="titleService" prefWidth="Infinity" text="Title" textAlignment="CENTER">
                                  <font>
                                     <Font size="31.0" />
                                  </font>
