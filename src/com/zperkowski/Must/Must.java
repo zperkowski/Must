@@ -27,7 +27,7 @@ public class Must extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Music Store");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setMinWidth(600);
+        primaryStage.setMinWidth(605);
         primaryStage.setMinHeight(450);
         primaryStage.show();
     }
