@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  * <p>
  * A <b>Mu</b>sic <b>St</b>ore application - <b>Must</b>.
@@ -18,6 +20,9 @@ import javafx.stage.Stage;
  * @version 1.0
  * */
 public class Must extends Application {
+
+    static ArrayList<Product> listOfProducts = new ArrayList<>();
+
     public static void main(String[] args) {
         launch(args);
     }

@@ -7,6 +7,12 @@ class Product {
     private BigDecimal price;
     private String description;
 
+    public Product(String name, BigDecimal price, String description) {
+        this.setName(name);
+        this.setPrice(price);
+        this.setDescription(description);
+    }
+
     public String getName() {
         return name;
     }
@@ -35,6 +41,11 @@ class Product {
 class Service extends Product {
     private int durationInHours;
 
+    public Service(String name, BigDecimal price, String description, int durationInHours) {
+        super(name, price, description);
+        this.durationInHours = durationInHours;
+    }
+
     public int getDurationInHours() {
         return durationInHours;
     }
@@ -51,6 +62,16 @@ class Instrument extends Product {
     private String model;
     private int guaranteeInMonths;
     private boolean isDigital;
+
+    public Instrument(String name, BigDecimal price, String description, int discount, float weight, String brand, String model, int guaranteeInMonths, boolean isDigital) {
+        super(name, price, description);
+        this.discount = discount;
+        this.weight = weight;
+        this.brand = brand;
+        this.model = model;
+        this.guaranteeInMonths = guaranteeInMonths;
+        this.isDigital = isDigital;
+    }
 
     public int getDiscount() {
         return discount;
@@ -106,6 +127,13 @@ class Guitar extends Instrument {
     private int frets;
     private String type;
 
+    public Guitar(String name, BigDecimal price, String description, int discount, float weight, String brand, String model, int guaranteeInMonths, boolean isDigital, int strings, int frets, String type) {
+        super(name, price, description, discount, weight, brand, model, guaranteeInMonths, isDigital);
+        this.strings = strings;
+        this.frets = frets;
+        this.type = type;
+    }
+
     public int getStrings() {
         return strings;
     }
@@ -134,6 +162,11 @@ class Guitar extends Instrument {
 class Keyboard extends Instrument {
     private int keys;
 
+    public Keyboard(String name, BigDecimal price, String description, int discount, float weight, String brand, String model, int guaranteeInMonths, boolean isDigital, int keys) {
+        super(name, price, description, discount, weight, brand, model, guaranteeInMonths, isDigital);
+        this.keys = keys;
+    }
+
     public int getKeys() {
         return keys;
     }
@@ -145,6 +178,11 @@ class Keyboard extends Instrument {
 
 class Percussion extends Instrument {
     private boolean isSetComplete;
+
+    public Percussion(String name, BigDecimal price, String description, int discount, float weight, String brand, String model, int guaranteeInMonths, boolean isDigital, boolean isSetComplete) {
+        super(name, price, description, discount, weight, brand, model, guaranteeInMonths, isDigital);
+        this.isSetComplete = isSetComplete;
+    }
 
     public boolean isSetComplete() {
         return isSetComplete;
@@ -158,6 +196,12 @@ class Percussion extends Instrument {
 class SoundSystem extends Instrument {
     private int minBandwidth;
     private int maxBandwidth;
+
+    public SoundSystem(String name, BigDecimal price, String description, int discount, float weight, String brand, String model, int guaranteeInMonths, boolean isDigital, int minBandwidth, int maxBandwidth) {
+        super(name, price, description, discount, weight, brand, model, guaranteeInMonths, isDigital);
+        this.minBandwidth = minBandwidth;
+        this.maxBandwidth = maxBandwidth;
+    }
 
     public int getMinBandwidth() {
         return minBandwidth;
@@ -180,6 +224,12 @@ class Speaker extends SoundSystem {
     private int rms;
     private int impedance;
 
+    public Speaker(String name, BigDecimal price, String description, int discount, float weight, String brand, String model, int guaranteeInMonths, boolean isDigital, int minBandwidth, int maxBandwidth, int rms, int impedance) {
+        super(name, price, description, discount, weight, brand, model, guaranteeInMonths, isDigital, minBandwidth, maxBandwidth);
+        this.rms = rms;
+        this.impedance = impedance;
+    }
+
     public int getRms() {
         return rms;
     }
@@ -200,6 +250,11 @@ class Speaker extends SoundSystem {
 class Mic extends SoundSystem {
     private int sensitivity;
 
+    public Mic(String name, BigDecimal price, String description, int discount, float weight, String brand, String model, int guaranteeInMonths, boolean isDigital, int minBandwidth, int maxBandwidth, int sensitivity) {
+        super(name, price, description, discount, weight, brand, model, guaranteeInMonths, isDigital, minBandwidth, maxBandwidth);
+        this.sensitivity = sensitivity;
+    }
+
     public int getSensitivity() {
         return sensitivity;
     }
@@ -213,6 +268,13 @@ class Consoles extends Instrument {
     private int maxPower;
     private int channels;
     private int bitsProcessor;
+
+    public Consoles(String name, BigDecimal price, String description, int discount, float weight, String brand, String model, int guaranteeInMonths, boolean isDigital, int maxPower, int channels, int bitsProcessor) {
+        super(name, price, description, discount, weight, brand, model, guaranteeInMonths, isDigital);
+        this.maxPower = maxPower;
+        this.channels = channels;
+        this.bitsProcessor = bitsProcessor;
+    }
 
     public int getMaxPower() {
         return maxPower;
