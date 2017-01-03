@@ -1,5 +1,7 @@
 package com.zperkowski.Must;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -38,6 +40,173 @@ public class ModifierController {
     public TextField textChannels;
     public TextField textBitsOfProcessor;
     public TextArea textDescription;
+
+    /***
+     * Initializes proper input for certain fields
+     */
+    @FXML
+    public void initialize() {
+
+        // int
+        textDuration.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textDuration.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        // TODO: Create regex for BigDecimal. Maybe regex for float fits to the BigDecimal?
+        // BigDecimal
+        textPrice.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textPrice.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textGuarantee.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textGuarantee.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        // TODO: Create regex for float
+        // float
+        textWeight.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textWeight.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        // TODO: Discount should stay between 5% and 50%
+        // int
+        textDiscount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textDiscount.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textStrings.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textStrings.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textFrets.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textFrets.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textKeys.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textKeys.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textMinBandwidth.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textMinBandwidth.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textMaxBandwidth.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textMaxBandwidth.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textImpedance.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textImpedance.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textRMS.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textRMS.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textSensitivity.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textSensitivity.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textMaxPower.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textMaxPower.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textChannels.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textChannels.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // int
+        textBitsOfProcessor.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textBitsOfProcessor.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+    }
 
 
     public void updateModifier() {
