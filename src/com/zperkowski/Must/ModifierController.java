@@ -264,211 +264,236 @@ public class ModifierController {
     }
 
     public void doneButtonClicked() {
-        // Variables below have to be validated
-        BigDecimal validatedPrice = Validation.stringToBigDecimal(textPrice.getText());
-        int validatedDiscount = 0;
-        float validatedWeight = 0;
-        int validatedGuarantee = 0;
-        int validatedStrings = 0;
-        int validatedFrets = 0;
-        int validatedKeys = 0;
-        int validatedMinBandwidth = 0;
-        int validatedMaxBandwidth = 0;
-        int validatedRms = 0;
-        int validatedImpedance = 0;
-        int validatedSensitivity = 0;
-        int validatedMaxPower = 0;
-        int validatedChannels = 0;
-        int validatedBitsProcessor = 0;
+        if (!isRequiredInformationMissing()) {
+            // Variables below have to be validated
+            BigDecimal validatedPrice = Validation.stringToBigDecimal(textPrice.getText());
+            int validatedDiscount = 0;
+            float validatedWeight = 0;
+            int validatedGuarantee = 0;
+            int validatedStrings = 0;
+            int validatedFrets = 0;
+            int validatedKeys = 0;
+            int validatedMinBandwidth = 0;
+            int validatedMaxBandwidth = 0;
+            int validatedRms = 0;
+            int validatedImpedance = 0;
+            int validatedSensitivity = 0;
+            int validatedMaxPower = 0;
+            int validatedChannels = 0;
+            int validatedBitsProcessor = 0;
 
-        switch ((String) comboProductChooser.getValue()) {
-            case "Service":
-                int validatedDuration = Validation.stringToInt(textDuration.getText());
+            switch ((String) comboProductChooser.getValue()) {
+                case "Service":
+                    int validatedDuration = Validation.stringToInt(textDuration.getText());
 
-                Must.listOfProducts.add(
-                        new Service(textName.getText(),
-                                validatedPrice,
-                                textDescription.getText(),
-                                validatedDuration)
-                );
-                break;
-            case "Product":
-                Must.listOfProducts.add(
-                        new Product(textName.getText(),
-                                validatedPrice,
-                                textDescription.getText()
-                        )
-                );
-                break;
-            case "Instrument":
-                validatedDiscount = Validation.stringToInt(textDiscount.getText());
-                validatedWeight = Validation.stringToFloat(textWeight.getText());
-                validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
+                    Must.listOfProducts.add(
+                            new Service(textName.getText(),
+                                    validatedPrice,
+                                    textDescription.getText(),
+                                    validatedDuration)
+                    );
+                    break;
+                case "Product":
+                    Must.listOfProducts.add(
+                            new Product(textName.getText(),
+                                    validatedPrice,
+                                    textDescription.getText()
+                            )
+                    );
+                    break;
+                case "Instrument":
+                    validatedDiscount = Validation.stringToInt(textDiscount.getText());
+                    validatedWeight = Validation.stringToFloat(textWeight.getText());
+                    validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
 
-                Must.listOfProducts.add(
-                        new Instrument(textName.getText(),
-                                validatedPrice,
-                                textDescription.getText(),
-                                validatedDiscount,
-                                validatedWeight,
-                                textBrand.getText(),
-                                textModel.getText(),
-                                validatedGuarantee,
-                                checkDigital.isSelected())
-                );
-                break;
-            case "Guitar":
-                validatedDiscount = Validation.stringToInt(textDiscount.getText());
-                validatedWeight = Validation.stringToFloat(textWeight.getText());
-                validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
-                validatedStrings = Validation.stringToInt(textStrings.getText());
-                validatedFrets = Validation.stringToInt(textFrets.getText());
+                    Must.listOfProducts.add(
+                            new Instrument(textName.getText(),
+                                    validatedPrice,
+                                    textDescription.getText(),
+                                    validatedDiscount,
+                                    validatedWeight,
+                                    textBrand.getText(),
+                                    textModel.getText(),
+                                    validatedGuarantee,
+                                    checkDigital.isSelected())
+                    );
+                    break;
+                case "Guitar":
+                    validatedDiscount = Validation.stringToInt(textDiscount.getText());
+                    validatedWeight = Validation.stringToFloat(textWeight.getText());
+                    validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
+                    validatedStrings = Validation.stringToInt(textStrings.getText());
+                    validatedFrets = Validation.stringToInt(textFrets.getText());
 
-                Must.listOfProducts.add(
-                        new Guitar(textName.getText(),
-                                validatedPrice,
-                                textDescription.getText(),
-                                validatedDiscount,
-                                validatedWeight,
-                                textBrand.getText(),
-                                textModel.getText(),
-                                validatedGuarantee,
-                                checkDigital.isSelected(),
-                                validatedStrings,
-                                validatedFrets,
-                                comboType.getValue().toString())
-                );
-                break;
-            case "Keyboard":
-                validatedDiscount = Validation.stringToInt(textDiscount.getText());
-                validatedWeight = Validation.stringToFloat(textWeight.getText());
-                validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
-                validatedKeys = Validation.stringToInt(textKeys.getText());
+                    Must.listOfProducts.add(
+                            new Guitar(textName.getText(),
+                                    validatedPrice,
+                                    textDescription.getText(),
+                                    validatedDiscount,
+                                    validatedWeight,
+                                    textBrand.getText(),
+                                    textModel.getText(),
+                                    validatedGuarantee,
+                                    checkDigital.isSelected(),
+                                    validatedStrings,
+                                    validatedFrets,
+                                    comboType.getValue().toString())
+                    );
+                    break;
+                case "Keyboard":
+                    validatedDiscount = Validation.stringToInt(textDiscount.getText());
+                    validatedWeight = Validation.stringToFloat(textWeight.getText());
+                    validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
+                    validatedKeys = Validation.stringToInt(textKeys.getText());
 
-                Must.listOfProducts.add(
-                        new Keyboard(textName.getText(),
-                                validatedPrice,
-                                textDescription.getText(),
-                                validatedDiscount,
-                                validatedWeight,
-                                textBrand.getText(),
-                                textModel.getText(),
-                                validatedGuarantee,
-                                checkDigital.isSelected(),
-                                validatedKeys)
-                );
-                break;
-            case "Percussion":
-                validatedDiscount = Validation.stringToInt(textDiscount.getText());
-                validatedWeight = Validation.stringToFloat(textWeight.getText());
-                validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
+                    Must.listOfProducts.add(
+                            new Keyboard(textName.getText(),
+                                    validatedPrice,
+                                    textDescription.getText(),
+                                    validatedDiscount,
+                                    validatedWeight,
+                                    textBrand.getText(),
+                                    textModel.getText(),
+                                    validatedGuarantee,
+                                    checkDigital.isSelected(),
+                                    validatedKeys)
+                    );
+                    break;
+                case "Percussion":
+                    validatedDiscount = Validation.stringToInt(textDiscount.getText());
+                    validatedWeight = Validation.stringToFloat(textWeight.getText());
+                    validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
 
-                Must.listOfProducts.add(
-                        new Percussion(textName.getText(),
-                                validatedPrice,
-                                textDescription.getText(),
-                                validatedDiscount,
-                                validatedWeight,
-                                textBrand.getText(),
-                                textModel.getText(),
-                                validatedGuarantee,
-                                checkDigital.isSelected(),
-                                checkIsSetComplete.isSelected())
-                );
-                break;
-            case "Sound system":
-                validatedDiscount = Validation.stringToInt(textDiscount.getText());
-                validatedWeight = Validation.stringToFloat(textWeight.getText());
-                validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
-                validatedMinBandwidth = Validation.stringToInt(textMinBandwidth.getText());
-                validatedMaxBandwidth = Validation.stringToInt(textMaxBandwidth.getText());
+                    Must.listOfProducts.add(
+                            new Percussion(textName.getText(),
+                                    validatedPrice,
+                                    textDescription.getText(),
+                                    validatedDiscount,
+                                    validatedWeight,
+                                    textBrand.getText(),
+                                    textModel.getText(),
+                                    validatedGuarantee,
+                                    checkDigital.isSelected(),
+                                    checkIsSetComplete.isSelected())
+                    );
+                    break;
+                case "Sound system":
+                    validatedDiscount = Validation.stringToInt(textDiscount.getText());
+                    validatedWeight = Validation.stringToFloat(textWeight.getText());
+                    validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
+                    validatedMinBandwidth = Validation.stringToInt(textMinBandwidth.getText());
+                    validatedMaxBandwidth = Validation.stringToInt(textMaxBandwidth.getText());
 
-                Must.listOfProducts.add(
-                        new SoundSystem(textName.getText(),
-                                validatedPrice,
-                                textDescription.getText(),
-                                validatedDiscount,
-                                validatedWeight,
-                                textBrand.getText(),
-                                textModel.getText(),
-                                validatedGuarantee,
-                                checkDigital.isSelected(),
-                                validatedMinBandwidth,
-                                validatedMaxBandwidth)
-                );
-                break;
-            case "Speakers":
-                validatedDiscount = Validation.stringToInt(textDiscount.getText());
-                validatedWeight = Validation.stringToFloat(textWeight.getText());
-                validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
-                validatedMinBandwidth = Validation.stringToInt(textMinBandwidth.getText());
-                validatedMaxBandwidth = Validation.stringToInt(textMaxBandwidth.getText());
-                validatedRms = Validation.stringToInt(textRMS.getText());
-                validatedImpedance = Validation.stringToInt(textImpedance.getText());
+                    Must.listOfProducts.add(
+                            new SoundSystem(textName.getText(),
+                                    validatedPrice,
+                                    textDescription.getText(),
+                                    validatedDiscount,
+                                    validatedWeight,
+                                    textBrand.getText(),
+                                    textModel.getText(),
+                                    validatedGuarantee,
+                                    checkDigital.isSelected(),
+                                    validatedMinBandwidth,
+                                    validatedMaxBandwidth)
+                    );
+                    break;
+                case "Speakers":
+                    validatedDiscount = Validation.stringToInt(textDiscount.getText());
+                    validatedWeight = Validation.stringToFloat(textWeight.getText());
+                    validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
+                    validatedMinBandwidth = Validation.stringToInt(textMinBandwidth.getText());
+                    validatedMaxBandwidth = Validation.stringToInt(textMaxBandwidth.getText());
+                    validatedRms = Validation.stringToInt(textRMS.getText());
+                    validatedImpedance = Validation.stringToInt(textImpedance.getText());
 
-                Must.listOfProducts.add(
-                        new Speaker(textName.getText(),
-                                validatedPrice,
-                                textDescription.getText(),
-                                validatedDiscount,
-                                validatedWeight,
-                                textBrand.getText(),
-                                textModel.getText(),
-                                validatedGuarantee,
-                                checkDigital.isSelected(),
-                                validatedMinBandwidth,
-                                validatedMaxBandwidth,
-                                validatedRms,
-                                validatedImpedance)
-                );
-                break;
-            case "Mic":
-                validatedDiscount = Validation.stringToInt(textDiscount.getText());
-                validatedWeight = Validation.stringToFloat(textWeight.getText());
-                validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
-                validatedMinBandwidth = Validation.stringToInt(textMinBandwidth.getText());
-                validatedMaxBandwidth = Validation.stringToInt(textMaxBandwidth.getText());
-                validatedSensitivity = Validation.stringToInt(textSensitivity.getText());
+                    Must.listOfProducts.add(
+                            new Speaker(textName.getText(),
+                                    validatedPrice,
+                                    textDescription.getText(),
+                                    validatedDiscount,
+                                    validatedWeight,
+                                    textBrand.getText(),
+                                    textModel.getText(),
+                                    validatedGuarantee,
+                                    checkDigital.isSelected(),
+                                    validatedMinBandwidth,
+                                    validatedMaxBandwidth,
+                                    validatedRms,
+                                    validatedImpedance)
+                    );
+                    break;
+                case "Mic":
+                    validatedDiscount = Validation.stringToInt(textDiscount.getText());
+                    validatedWeight = Validation.stringToFloat(textWeight.getText());
+                    validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
+                    validatedMinBandwidth = Validation.stringToInt(textMinBandwidth.getText());
+                    validatedMaxBandwidth = Validation.stringToInt(textMaxBandwidth.getText());
+                    validatedSensitivity = Validation.stringToInt(textSensitivity.getText());
 
-                Must.listOfProducts.add(
-                        new Mic(textName.getText(),
-                                validatedPrice,
-                                textDescription.getText(),
-                                validatedDiscount,
-                                validatedWeight,
-                                textBrand.getText(),
-                                textModel.getText(),
-                                validatedGuarantee,
-                                checkDigital.isSelected(),
-                                validatedMinBandwidth,
-                                validatedMaxBandwidth,
-                                validatedSensitivity)
-                );
-                break;
-            case "Console":
-                validatedDiscount = Validation.stringToInt(textDiscount.getText());
-                validatedWeight = Validation.stringToFloat(textWeight.getText());
-                validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
-                validatedMaxPower = Validation.stringToInt(textMaxPower.getText());
-                validatedChannels = Validation.stringToInt(textChannels.getText());
-                validatedBitsProcessor = Validation.stringToInt(textBitsOfProcessor.getText());
+                    Must.listOfProducts.add(
+                            new Mic(textName.getText(),
+                                    validatedPrice,
+                                    textDescription.getText(),
+                                    validatedDiscount,
+                                    validatedWeight,
+                                    textBrand.getText(),
+                                    textModel.getText(),
+                                    validatedGuarantee,
+                                    checkDigital.isSelected(),
+                                    validatedMinBandwidth,
+                                    validatedMaxBandwidth,
+                                    validatedSensitivity)
+                    );
+                    break;
+                case "Console":
+                    validatedDiscount = Validation.stringToInt(textDiscount.getText());
+                    validatedWeight = Validation.stringToFloat(textWeight.getText());
+                    validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
+                    validatedMaxPower = Validation.stringToInt(textMaxPower.getText());
+                    validatedChannels = Validation.stringToInt(textChannels.getText());
+                    validatedBitsProcessor = Validation.stringToInt(textBitsOfProcessor.getText());
 
-                Must.listOfProducts.add(
-                        new Consoles(textName.getText(),
-                                validatedPrice,
-                                textDescription.getText(),
-                                validatedDiscount,
-                                validatedWeight,
-                                textBrand.getText(),
-                                textModel.getText(),
-                                validatedGuarantee,
-                                checkDigital.isSelected(),
-                                validatedMaxPower,
-                                validatedChannels,
-                                validatedBitsProcessor)
-                );
-                break;
+                    Must.listOfProducts.add(
+                            new Consoles(textName.getText(),
+                                    validatedPrice,
+                                    textDescription.getText(),
+                                    validatedDiscount,
+                                    validatedWeight,
+                                    textBrand.getText(),
+                                    textModel.getText(),
+                                    validatedGuarantee,
+                                    checkDigital.isSelected(),
+                                    validatedMaxPower,
+                                    validatedChannels,
+                                    validatedBitsProcessor)
+                    );
+                    break;
+            }
         }
+    }
+
+    private boolean isRequiredInformationMissing() {
+        boolean isMissing = false;
+        if (textName.getText() == null || textName.getText().trim().isEmpty()) {
+            textName.setStyle("-fx-text-box-border: red;");
+            isMissing = true;
+        } else {
+            textName.setStyle("-fx-text-box-border: lightgray;");
+        }
+        if (textPrice.getText() == null || textPrice.getText().trim().isEmpty()) {
+            textPrice.setStyle("-fx-text-box-border: red;");
+            isMissing = true;
+        } else {
+            textPrice.setStyle("-fx-text-box-border: lightgray;");
+        }
+        if ((textDuration.getText() == null || textDuration.getText().trim().isEmpty()) && !textDuration.isDisabled()) {
+            textDuration.setStyle("-fx-text-box-border: red;");
+            isMissing = true;
+        } else {
+            textDuration.setStyle("-fx-text-box-border: lightgray;");
+        }
+        return isMissing;
     }
 
     /**
