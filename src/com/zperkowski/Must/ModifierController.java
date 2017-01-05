@@ -611,10 +611,7 @@ public class ModifierController {
         );
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
-            System.out.print(file.getAbsoluteFile());
-            System.out.print(file.toURI().toString());
             image = new Image(file.toURI().toString());
-            System.out.print(file.getAbsoluteFile());
             return image;
         }
         return null;
