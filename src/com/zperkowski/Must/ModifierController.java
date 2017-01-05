@@ -3,17 +3,19 @@ package com.zperkowski.Must;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.math.BigDecimal;
 
 /**
  * A controller for the products modifier.
  */
 public class ModifierController {
+    Image imageProduct;
 
     @FXML
     public ComboBox comboProductChooser;
@@ -40,6 +42,7 @@ public class ModifierController {
     public TextField textChannels;
     public TextField textBitsOfProcessor;
     public TextArea textDescription;
+    public Label labelPicture;
 
     /***
      * Initializes proper input for certain fields
@@ -290,6 +293,7 @@ public class ModifierController {
                             new Service(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
+                                    imageProduct,
                                     validatedDuration)
                     );
                     break;
@@ -297,7 +301,8 @@ public class ModifierController {
                     Must.listOfProducts.add(
                             new Product(textName.getText(),
                                     validatedPrice,
-                                    textDescription.getText()
+                                    textDescription.getText(),
+                                    imageProduct
                             )
                     );
                     break;
@@ -310,6 +315,7 @@ public class ModifierController {
                             new Instrument(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
+                                    imageProduct,
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -329,6 +335,7 @@ public class ModifierController {
                             new Guitar(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
+                                    imageProduct,
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -350,6 +357,7 @@ public class ModifierController {
                             new Keyboard(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
+                                    imageProduct,
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -368,6 +376,7 @@ public class ModifierController {
                             new Percussion(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
+                                    imageProduct,
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -388,6 +397,7 @@ public class ModifierController {
                             new SoundSystem(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
+                                    imageProduct,
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -411,6 +421,7 @@ public class ModifierController {
                             new Speaker(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
+                                    imageProduct,
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -435,6 +446,7 @@ public class ModifierController {
                             new Mic(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
+                                    imageProduct,
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -458,6 +470,7 @@ public class ModifierController {
                             new Consoles(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
+                                    imageProduct,
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -574,5 +587,36 @@ public class ModifierController {
         textMaxPower.setDisable(false);
         textChannels.setDisable(false);
         textBitsOfProcessor.setDisable(false);
+    }
+
+    public void buttonPictureClicked() {
+        imageProduct = openPictureDialog();
+        labelPicture.setText("Image chosen");
+    }
+
+    /**
+     * Opens a dialog to choose picture.
+     * @return Returns a Image of the chosen file.
+     */
+    private Image openPictureDialog() {
+        Image image;
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select a picture");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("GIF", "*.gif")
+        );
+        File file = fileChooser.showOpenDialog(new Stage());
+        if (file != null) {
+            System.out.print(file.getAbsoluteFile());
+            System.out.print(file.toURI().toString());
+            image = new Image(file.toURI().toString());
+            System.out.print(file.getAbsoluteFile());
+            return image;
+        }
+        return null;
     }
 }
