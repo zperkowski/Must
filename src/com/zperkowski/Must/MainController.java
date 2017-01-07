@@ -17,21 +17,21 @@ import java.io.IOException;
 public class MainController {
 
     @FXML
-    TreeView<String> treeProducts;
+    TreeView<Product> treeProducts;
     @FXML
-    TreeView<String> treeServices;
+    TreeView<Product> treeServices;
 
-    private TreeItem<String> rootProducts = new TreeItem<>("root");
-    private TreeItem<String> rootServices = new TreeItem<>("Services");
-    private TreeItem<String> itemProducts = new TreeItem<>("Products");
-    private TreeItem<String> itemInstruments = new TreeItem<>("Instruments");
-    private TreeItem<String> itemGuitars = new TreeItem<>("Guitar");
-    private TreeItem<String> itemKeyboards = new TreeItem<>("Keyboards");
-    private TreeItem<String> itemPercussions = new TreeItem<>("Percussions");
-    private TreeItem<String> itemSoundsSystems = new TreeItem<>("Sounds Systems");
-    private TreeItem<String> itemSpeakers = new TreeItem<>("Speakers");
-    private TreeItem<String> itemMics = new TreeItem<>("Mics");
-    private TreeItem<String> itemConsoles = new TreeItem<>("Consoles");
+    private TreeItem<Product> rootProducts = new TreeItem<>(new Product("root", null, null, null));
+    private TreeItem<Product> rootServices = new TreeItem<>(new Product("Services", null, null, null));
+    private TreeItem<Product> itemProducts = new TreeItem<>(new Product("Products", null, null, null));
+    private TreeItem<Product> itemInstruments = new TreeItem<>(new Product("Instruments", null, null, null));
+    private TreeItem<Product> itemGuitars = new TreeItem<>(new Product("Guitar", null, null, null));
+    private TreeItem<Product> itemKeyboards = new TreeItem<>(new Product("Keyboards", null, null, null));
+    private TreeItem<Product> itemPercussions = new TreeItem<>(new Product("Percussions", null, null, null));
+    private TreeItem<Product> itemSoundsSystems = new TreeItem<>(new Product("Sounds Systems", null, null, null));
+    private TreeItem<Product> itemSpeakers = new TreeItem<>(new Product("Speakers", null, null, null));
+    private TreeItem<Product> itemMics = new TreeItem<>(new Product("Mics", null, null, null));
+    private TreeItem<Product> itemConsoles = new TreeItem<>(new Product("Consoles", null, null, null));
 
 
     @FXML
@@ -102,7 +102,7 @@ public class MainController {
         clearTrees();
 
         for (int i = 0; i < Must.listOfProducts.size(); i++) {
-            TreeItem<String> item = new TreeItem<>(Must.listOfProducts.get(i).getName());
+            TreeItem<Product> item = new TreeItem<>(Must.listOfProducts.get(i));
 
             switch (Must.listOfProducts.get(i).getClass().getName()) {
                 case "com.zperkowski.Must.Service":

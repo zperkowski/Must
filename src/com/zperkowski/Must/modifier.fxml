@@ -77,6 +77,9 @@
                                     <String fx:value="Bass" />
                                 </FXCollections>
                             </items>
+                            <value>
+                                <String fx:value="Classic" />
+                            </value>
                         </ComboBox>
                         <CheckBox fx:id="checkDigital" disable="true" mnemonicParsing="false" text="Is digital?" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                         <CheckBox fx:id="checkIsSetComplete" disable="true" mnemonicParsing="false" text="Is the set complete?" GridPane.columnIndex="3" GridPane.rowIndex="3" />

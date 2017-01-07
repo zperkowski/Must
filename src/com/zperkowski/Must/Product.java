@@ -49,6 +49,10 @@ class Product {
     public void setImage(Image image) {
         this.image = image;
     }
+
+    public String toString() {
+        return getName();
+    }
 }
 
 class Service extends Product {

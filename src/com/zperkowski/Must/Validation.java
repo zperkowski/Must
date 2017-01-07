@@ -26,12 +26,16 @@ class Validation {
     }
 
     static int stringToInt(String string) {
-        int integer = Integer.parseInt(string);
-        return integer;
+        if (string.trim() == "")
+            return Integer.parseInt(string);
+        else
+            return 0;
     }
 
     static float stringToFloat(String string) {
-        float floater = Float.parseFloat(string);
-        return floater;
+        if (string.trim() == "")
+            return Float.parseFloat(string);
+        else
+            return 0.0f;
     }
 }
