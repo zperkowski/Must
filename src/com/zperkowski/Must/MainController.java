@@ -1,11 +1,13 @@
 package com.zperkowski.Must;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,6 +22,39 @@ public class MainController {
     TreeView<Product> treeProducts;
     @FXML
     TreeView<Product> treeServices;
+
+    // Product tab
+    @FXML Label titleProduct;
+    @FXML ImageView imageProduct;
+    @FXML TextField textProductName;
+    @FXML TextField textProductPrice;
+    @FXML TextField textProductBrand;
+    @FXML TextField textProductModel;
+    @FXML TextField textProductType;
+    @FXML TextField textProductWeight;
+    @FXML TextField textProductGuarantee;
+    @FXML CheckBox checkProductDigital;
+    @FXML CheckBox checkProductIsSetComplete;
+    @FXML TextField textProductDiscount;
+    @FXML TextField textProductStrings;
+    @FXML TextField textProductFrets;
+    @FXML TextField textProductKeys;
+    @FXML TextField textProductMinBandwidth;
+    @FXML TextField textProductMaxBandwidth;
+    @FXML TextField textProductImpedance;
+    @FXML TextField textProductRMS;
+    @FXML TextField textProductSensitivity;
+    @FXML TextField textProductMaxPower;
+    @FXML TextField textProductChannels;
+    @FXML TextField textProductBitsOfProcessor;
+    @FXML TextField textProductDescription;
+
+    // Service tab
+    @FXML Label titleService;
+    @FXML ImageView imageService;
+    @FXML TextField textServicePrice;
+    @FXML TextField textServiceDuration;
+    @FXML TextField textServiceDescription;
 
     private TreeItem<Product> rootProducts = new TreeItem<>(new Product("root", null, null, null));
     private TreeItem<Product> rootServices = new TreeItem<>(new Product("Services", null, null, null));
@@ -38,6 +73,52 @@ public class MainController {
     public void initialize() {
         initTreeProducts();
         initTreeServices();
+
+        treeProducts.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<Product>>() {
+                @Override
+                public void changed(ObservableValue<? extends TreeItem<Product>> observable, TreeItem<Product> oldValue, TreeItem<Product> newValue) {
+                    clearDetailOfProduct();
+                    switch (newValue.getValue().getClass().getName()) {
+                        case "com.zperkowski.Must.Product":
+                            fillDetailOfProduct(newValue.getValue());
+                            break;
+                        case "com.zperkowski.Must.Instrument":
+                            fillDetailOfProduct((Instrument) newValue.getValue());
+                            break;
+                        case "com.zperkowski.Must.Guitar":
+                            fillDetailOfProduct((Guitar) newValue.getValue());
+                            break;
+                        case "com.zperkowski.Must.Keyboard":
+                            fillDetailOfProduct((Keyboard) newValue.getValue());
+                            break;
+                        case "com.zperkowski.Must.Percussion":
+                            fillDetailOfProduct((Percussion) newValue.getValue());
+                            break;
+                        case "com.zperkowski.Must.SoundSystem":
+                            fillDetailOfProduct((SoundSystem) newValue.getValue());
+                            break;
+                        case "com.zperkowski.Must.Speaker":
+                            fillDetailOfProduct((Speaker) newValue.getValue());
+                            break;
+                        case "com.zperkowski.Must.Mic":
+                            fillDetailOfProduct((Mic) newValue.getValue());
+                            break;
+                        case "com.zperkowski.Must.Consoles":
+                            fillDetailOfProduct((Consoles) newValue.getValue());
+                            break;
+                    }
+                }
+            }
+        );
+
+        treeServices.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<Product>>() {
+                @Override
+                public void changed(ObservableValue<? extends TreeItem<Product>> observable, TreeItem<Product> oldValue, TreeItem<Product> newValue) {
+                    clearDetailOfProduct();
+                    fillDetailOfProduct( (Service) newValue.getValue());
+                }
+            }
+        );
     }
 
     public void displayModifier() {
@@ -136,6 +217,129 @@ public class MainController {
                     itemConsoles.getChildren().add(item);
                     break;
             }
+        }
+    }
+
+    private void clearDetailOfProduct() {
+        titleProduct.setText("Name");
+        imageProduct.setImage(null);
+        textProductName.setText("");
+        textProductPrice.setText("");
+        textProductBrand.setText("");
+        textProductModel.setText("");
+        textProductType.setText("");
+        textProductWeight.setText("");
+        textProductGuarantee.setText("");
+        checkProductDigital.setSelected(false);
+        checkProductIsSetComplete.setSelected(false);
+        textProductDiscount.setText("");
+        textProductStrings.setText("");
+        textProductFrets.setText("");
+        textProductKeys.setText("");
+        textProductMinBandwidth.setText("");
+        textProductMaxBandwidth.setText("");
+        textProductImpedance.setText("");
+        textProductRMS.setText("");
+        textProductSensitivity.setText("");
+        textProductMaxPower.setText("");
+        textProductChannels.setText("");
+        textProductBitsOfProcessor.setText("");
+        textProductDescription.setText("");
+    }
+
+    private void fillDetailOfProduct(Product product) {
+        if (product.getPrice() != null) {
+            titleProduct.setText(product.getName());
+            textProductName.setText(product.getName());
+            imageProduct.setImage(product.getImage());
+            textProductPrice.setText(product.getPrice().toString());
+            textProductDescription.setText(product.getDescription());
+        }
+    }
+
+    private void fillDetailOfProduct(Instrument product) {
+        if (product.getPrice() != null) {
+            fillDetailOfProduct( (Product) product);
+            textProductBrand.setText(product.getBrand());
+            textProductModel.setText(product.getModel());
+            textProductDiscount.setText(Integer.toString(product.getDiscount()));
+            textProductWeight.setText(Float.toString(product.getWeight()));
+            textProductGuarantee.setText(Integer.toString(product.getGuaranteeInMonths()));
+            checkProductDigital.setSelected(product.isDigital());
+        }
+    }
+
+    private void fillDetailOfProduct(Guitar product) {
+        if (product.getPrice() != null) {
+            fillDetailOfProduct( (Product) product);
+            fillDetailOfProduct( (Instrument) product);
+            textProductStrings.setText(Integer.toString(product.getStrings()));
+            textProductFrets.setText(Integer.toString(product.getFrets()));
+            textProductType.setText(product.getType());
+        }
+    }
+
+    private void fillDetailOfProduct(Keyboard product) {
+        if (product.getPrice() != null) {
+            fillDetailOfProduct( (Product) product);
+            fillDetailOfProduct( (Instrument) product);
+            textProductKeys.setText(Integer.toString(product.getKeys()));
+        }
+    }
+
+    private void fillDetailOfProduct(Percussion product) {
+        if (product.getPrice() != null) {
+            fillDetailOfProduct( (Product) product);
+            fillDetailOfProduct( (Instrument) product);
+            checkProductIsSetComplete.setSelected(product.isSetComplete());
+        }
+    }
+
+    private void fillDetailOfProduct(SoundSystem product) {
+        if (product.getPrice() != null) {
+            fillDetailOfProduct( (Product) product);
+            fillDetailOfProduct( (Instrument) product);
+            textProductMinBandwidth.setText(Integer.toString(product.getMinBandwidth()));
+            textProductMaxBandwidth.setText(Integer.toString(product.getMaxBandwidth()));
+        }
+    }
+
+    private void fillDetailOfProduct(Speaker product) {
+        if (product.getPrice() != null) {
+            fillDetailOfProduct( (Product) product);
+            fillDetailOfProduct( (Instrument) product);
+            fillDetailOfProduct( (SoundSystem) product);
+            textProductRMS.setText(Integer.toString(product.getRms()));
+            textProductImpedance.setText(Integer.toString(product.getImpedance()));
+        }
+    }
+
+    private void fillDetailOfProduct(Mic product) {
+        if (product.getPrice() != null) {
+            fillDetailOfProduct( (Product) product);
+            fillDetailOfProduct( (Instrument) product);
+            fillDetailOfProduct( (SoundSystem) product);
+            textProductSensitivity.setText(Integer.toString(product.getSensitivity()));
+        }
+    }
+
+    private void fillDetailOfProduct(Consoles product) {
+        if (product.getPrice() != null) {
+            fillDetailOfProduct( (Product) product);
+            fillDetailOfProduct( (Instrument) product);
+            textProductMaxPower.setText(Integer.toString(product.getMaxPower()));
+            textProductChannels.setText(Integer.toString(product.getChannels()));
+            textProductBitsOfProcessor.setText(Integer.toString(product.getBitsProcessor()));
+        }
+    }
+
+    private void fillDetailOfProduct(Service product) {
+        if (product.getPrice() != null) {
+            titleService.setText(product.getName());
+            imageService.setImage(product.getImage());
+            textServicePrice.setText(product.getPrice().toString());
+            textServiceDescription.setText(product.getDescription());
+            textServiceDuration.setText(Integer.toString(product.getDurationInHours()));
         }
     }
 }
