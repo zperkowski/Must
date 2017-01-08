@@ -57,7 +57,7 @@ public class MainController {
     @FXML TextField textServiceDescription;
 
     private TreeItem<Product> rootProducts = new TreeItem<>(new Product("root", null, null, null));
-    private TreeItem<Product> rootServices = new TreeItem<>(new Product("Services", null, null, null));
+    private TreeItem<Product> rootServices = new TreeItem<>(new Service("Services", null, null, null, 0));
     private TreeItem<Product> itemProducts = new TreeItem<>(new Product("Products", null, null, null));
     private TreeItem<Product> itemInstruments = new TreeItem<>(new Product("Instruments", null, null, null));
     private TreeItem<Product> itemGuitars = new TreeItem<>(new Product("Guitar", null, null, null));
@@ -77,7 +77,7 @@ public class MainController {
         treeProducts.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<Product>>() {
                 @Override
                 public void changed(ObservableValue<? extends TreeItem<Product>> observable, TreeItem<Product> oldValue, TreeItem<Product> newValue) {
-                    clearDetailOfProduct();
+                    clearDetails();
                     switch (newValue.getValue().getClass().getName()) {
                         case "com.zperkowski.Must.Product":
                             fillDetailOfProduct(newValue.getValue());
@@ -114,7 +114,7 @@ public class MainController {
         treeServices.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<Product>>() {
                 @Override
                 public void changed(ObservableValue<? extends TreeItem<Product>> observable, TreeItem<Product> oldValue, TreeItem<Product> newValue) {
-                    clearDetailOfProduct();
+                    clearDetails();
                     fillDetailOfProduct( (Service) newValue.getValue());
                 }
             }
@@ -134,6 +134,19 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void newApp() {
+        Must.listOfProducts.clear();
+        rootServices.getChildren().clear();
+        itemProducts.getChildren().clear();
+        itemInstruments.getChildren().clear();
+        itemGuitars.getChildren().clear();
+        itemKeyboards.getChildren().clear();
+        itemSoundsSystems.getChildren().clear();
+        itemSpeakers.getChildren().clear();
+        itemMics.getChildren().clear();
+        itemConsoles.getChildren().clear();
     }
 
     public void closeApp() {
@@ -220,8 +233,9 @@ public class MainController {
         }
     }
 
-    private void clearDetailOfProduct() {
-        titleProduct.setText("Name");
+    private void clearDetails() {
+        // Products tab
+        titleProduct.setText("");
         imageProduct.setImage(null);
         textProductName.setText("");
         textProductPrice.setText("");
@@ -245,6 +259,13 @@ public class MainController {
         textProductChannels.setText("");
         textProductBitsOfProcessor.setText("");
         textProductDescription.setText("");
+
+        // Services tab
+        titleService.setText("");
+        imageService.setImage(null);
+        textServiceDuration.setText("");
+        textServicePrice.setText("");
+        textServiceDescription.setText("");
     }
 
     private void fillDetailOfProduct(Product product) {
