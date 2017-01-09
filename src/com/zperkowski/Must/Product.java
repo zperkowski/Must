@@ -1,14 +1,20 @@
 package com.zperkowski.Must;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-class Product {
+class Product implements Serializable{
     private String name;
     private BigDecimal price;
     private String description;
-    private Image image;
+    private transient Image image;
 
 
     public Product(String name, BigDecimal price, String description, Image image) {
@@ -52,6 +58,16 @@ class Product {
 
     public String toString() {
         return getName();
+    }
+
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        s.defaultReadObject();
+        image = SwingFXUtils.toFXImage(ImageIO.read(s), null);
+    }
+
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        s.defaultWriteObject();
+        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "jpg", s);
     }
 }
 

@@ -13,8 +13,8 @@
           <Menu id="fileMenu" mnemonicParsing="false" text="File">
             <items>
                   <MenuItem disable="false" mnemonicParsing="false" onAction="#newApp" text="New" />
-                  <MenuItem disable="true" mnemonicParsing="false" text="Save..." />
-                  <MenuItem disable="true" mnemonicParsing="false" text="Open..." />
+                  <MenuItem disable="false" mnemonicParsing="false" onAction="#saveApp" text="Save..." />
+                  <MenuItem disable="false" mnemonicParsing="false" onAction="#openApp" text="Open..." />
                   <SeparatorMenuItem disable="true" mnemonicParsing="false" />
               <MenuItem id="menuFileClose" mnemonicParsing="false" onAction="#closeApp" text="Close" />
             </items>

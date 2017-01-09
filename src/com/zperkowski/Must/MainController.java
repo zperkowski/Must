@@ -8,9 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 
 /**
  * This class is a controller for the main window.
@@ -147,6 +149,43 @@ public class MainController {
         itemSpeakers.getChildren().clear();
         itemMics.getChildren().clear();
         itemConsoles.getChildren().clear();
+    }
+
+    public void saveApp() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save as...");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(".must", "*.must"));
+        File file = fileChooser.showSaveDialog(new Stage());
+        if (file != null) {
+            try {
+                ObjectOutputStream outFile = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file.getAbsoluteFile())));
+                outFile.writeObject(Must.listOfProducts);
+                outFile.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void openApp() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open file");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(".must", "*.must"));
+        File file = fileChooser.showOpenDialog(new Stage());
+        if (file != null) {
+            try {
+            ObjectInputStream inFile = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file.getAbsoluteFile())));
+            Must.listOfProducts = (ArrayList) inFile.readObject();
+                inFile.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e){
+                e.printStackTrace();
+            }
+        }
+        updateTrees();
     }
 
     public void closeApp() {
