@@ -24,7 +24,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#displayModifier" text="Add..." />
                   <RadioMenuItem disable="true" mnemonicParsing="false" text="Edit..." />
               <MenuItem id="menuEditDuplicate" disable="true" mnemonicParsing="false" text="Duplicate" />
-                  <MenuItem disable="true" mnemonicParsing="false" text="Remove" />
+                  <MenuItem disable="false" onAction="#removeProduct" mnemonicParsing="false" text="Remove" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="updateList" mnemonicParsing="false" onAction="#updateTrees" text="Update list" />
             </items>
@@ -40,7 +40,7 @@
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab id="tabProducts" closable="false" text="Products">
+          <Tab fx:id="tabProducts" closable="false" text="Products">
                <content>
                   <SplitPane id="tabProductsSplit" dividerPositions="0.29" prefHeight="160.0" prefWidth="200.0">
                     <items>
@@ -153,7 +153,7 @@
                   </SplitPane>
                </content>
           </Tab>
-          <Tab id="tabServices" closable="false" text="Services">
+          <Tab fx:id="tabServices" closable="false" text="Services">
                <content>
                   <SplitPane id="tabServicesSplit" dividerPositions="0.29" prefHeight="160.0" prefWidth="200.0">
                     <items>

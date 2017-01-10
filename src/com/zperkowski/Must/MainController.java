@@ -21,6 +21,11 @@ import java.util.ArrayList;
 public class MainController {
 
     @FXML
+    Tab tabProducts;
+    @FXML
+    Tab tabServices;
+
+    @FXML
     TreeView<Product> treeProducts;
     @FXML
     TreeView<Product> treeServices;
@@ -194,6 +199,24 @@ public class MainController {
 
     public void showAbout() {
         About.display();
+    }
+
+    public void removeProduct() {
+        int index;
+        if (tabProducts.isSelected())
+            for (int i = 0; i < treeProducts.getSelectionModel().getSelectedItems().size(); i++) {
+                index = Must.searchInListOfProducts(treeProducts.getSelectionModel().getSelectedItems().get(i).getValue());
+                if (index > -1)
+                    Must.listOfProducts.remove(index);
+            }
+        if (tabServices.isSelected())
+            for (int i = 0; i < treeServices.getSelectionModel().getSelectedItems().size(); i++) {
+                index = Must.searchInListOfProducts(treeServices.getSelectionModel().getSelectedItems().get(i).getValue());
+                if (index > -1)
+                    Must.listOfProducts.remove(index);
+            }
+
+        updateTrees();
     }
 
     private void initTreeProducts() {
