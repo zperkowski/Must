@@ -13,12 +13,16 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * This class is a controller for the main window.
  * The main window layout is set in main.fxml.
  */
 public class MainController {
+
+    @FXML
+    MenuItem menuItemRemove;
 
     @FXML
     Tab tabProducts;
@@ -84,6 +88,7 @@ public class MainController {
         treeProducts.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<Product>>() {
                 @Override
                 public void changed(ObservableValue<? extends TreeItem<Product>> observable, TreeItem<Product> oldValue, TreeItem<Product> newValue) {
+                    canBeRemoved(newValue);
                     clearDetails();
                     switch (newValue.getValue().getClass().getName()) {
                         case "com.zperkowski.Must.Product":
@@ -121,6 +126,7 @@ public class MainController {
         treeServices.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<Product>>() {
                 @Override
                 public void changed(ObservableValue<? extends TreeItem<Product>> observable, TreeItem<Product> oldValue, TreeItem<Product> newValue) {
+                    canBeRemoved(newValue);
                     clearDetails();
                     fillDetailOfProduct( (Service) newValue.getValue());
                 }
@@ -139,6 +145,36 @@ public class MainController {
         else if (tabServices.isSelected())
             Must.indexOfSelectedItem = Must.searchInListOfProducts(treeServices.getSelectionModel().getSelectedItems().get(0).getValue());
         displayModifier();
+    }
+
+    public void removeProduct() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Remove a product");
+        alert.setHeaderText("Do you want to remove selected product?");
+        Optional confirmation = alert.showAndWait();
+        if (confirmation.get() == ButtonType.OK) {
+            int index;
+            if (tabProducts.isSelected())
+                for (int i = 0; i < treeProducts.getSelectionModel().getSelectedItems().size(); i++) {
+                    index = Must.searchInListOfProducts(treeProducts.getSelectionModel().getSelectedItems().get(i).getValue());
+                    if (index > -1)
+                        Must.listOfProducts.remove(index);
+                }
+            else if (tabServices.isSelected())
+                for (int i = 0; i < treeServices.getSelectionModel().getSelectedItems().size(); i++) {
+                    index = Must.searchInListOfProducts(treeServices.getSelectionModel().getSelectedItems().get(i).getValue());
+                    if (index > -1)
+                        Must.listOfProducts.remove(index);
+                }
+            updateTrees();
+        }
+    }
+
+    private void canBeRemoved(TreeItem<Product> newValue) {
+        if (newValue.getValue().getPrice() != null)
+            menuItemRemove.setDisable(false);
+        else
+            menuItemRemove.setDisable(true);
     }
 
     private void displayModifier() {
@@ -212,24 +248,6 @@ public class MainController {
 
     public void showAbout() {
         About.display();
-    }
-
-    public void removeProduct() {
-        int index;
-        if (tabProducts.isSelected())
-            for (int i = 0; i < treeProducts.getSelectionModel().getSelectedItems().size(); i++) {
-                index = Must.searchInListOfProducts(treeProducts.getSelectionModel().getSelectedItems().get(i).getValue());
-                if (index > -1)
-                    Must.listOfProducts.remove(index);
-            }
-        else if (tabServices.isSelected())
-            for (int i = 0; i < treeServices.getSelectionModel().getSelectedItems().size(); i++) {
-                index = Must.searchInListOfProducts(treeServices.getSelectionModel().getSelectedItems().get(i).getValue());
-                if (index > -1)
-                    Must.listOfProducts.remove(index);
-            }
-
-        updateTrees();
     }
 
     private void initTreeProducts() {

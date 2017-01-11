@@ -24,7 +24,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#addProduct" text="Add..." />
                   <MenuItem disable="false" onAction="#editProduct" mnemonicParsing="false" text="Edit..." />
               <MenuItem id="menuEditDuplicate" disable="true" mnemonicParsing="false" text="Duplicate" />
-                  <MenuItem disable="false" onAction="#removeProduct" mnemonicParsing="false" text="Remove" />
+                  <MenuItem fx:id="menuItemRemove" disable="true" onAction="#removeProduct" mnemonicParsing="false" text="Remove" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="updateList" mnemonicParsing="false" onAction="#updateTrees" text="Update list" />
             </items>
