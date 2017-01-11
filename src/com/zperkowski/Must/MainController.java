@@ -128,7 +128,20 @@ public class MainController {
         );
     }
 
-    public void displayModifier() {
+    public void addProduct() {
+        Must.indexOfSelectedItem = -1;
+        displayModifier();
+    }
+
+    public void editProduct() {
+        if (tabProducts.isSelected())
+            Must.indexOfSelectedItem = Must.searchInListOfProducts(treeProducts.getSelectionModel().getSelectedItems().get(0).getValue());
+        else if (tabServices.isSelected())
+            Must.indexOfSelectedItem = Must.searchInListOfProducts(treeServices.getSelectionModel().getSelectedItems().get(0).getValue());
+        displayModifier();
+    }
+
+    private void displayModifier() {
         try {
             Parent parentModifier = FXMLLoader.load(getClass().getResource("modifier.fxml"));
             Stage stageModifier = new Stage();
@@ -209,7 +222,7 @@ public class MainController {
                 if (index > -1)
                     Must.listOfProducts.remove(index);
             }
-        if (tabServices.isSelected())
+        else if (tabServices.isSelected())
             for (int i = 0; i < treeServices.getSelectionModel().getSelectedItems().size(); i++) {
                 index = Must.searchInListOfProducts(treeServices.getSelectionModel().getSelectedItems().get(i).getValue());
                 if (index > -1)

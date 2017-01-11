@@ -21,8 +21,8 @@
           </Menu>
           <Menu id="fileEdit" mnemonicParsing="false" text="Edit">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#displayModifier" text="Add..." />
-                  <RadioMenuItem disable="true" mnemonicParsing="false" text="Edit..." />
+                  <MenuItem mnemonicParsing="false" onAction="#addProduct" text="Add..." />
+                  <MenuItem disable="false" onAction="#editProduct" mnemonicParsing="false" text="Edit..." />
               <MenuItem id="menuEditDuplicate" disable="true" mnemonicParsing="false" text="Duplicate" />
                   <MenuItem disable="false" onAction="#removeProduct" mnemonicParsing="false" text="Remove" />
                   <SeparatorMenuItem mnemonicParsing="false" />

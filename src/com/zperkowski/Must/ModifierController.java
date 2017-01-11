@@ -18,6 +18,7 @@ public class ModifierController {
     Image imageProduct;
 
     @FXML
+    public Button buttonFinish;
     public ComboBox comboProductChooser;
     public TextField textDuration;
     public TextField textName;
@@ -44,11 +45,99 @@ public class ModifierController {
     public TextArea textDescription;
     public Label labelPicture;
 
+    private int indexOfEditing;
+
     /***
-     * Initializes proper input for certain fields
+     * Initializes proper input for certain fields and checks if should add or edit a Product
      */
     @FXML
     public void initialize() {
+
+        indexOfEditing = Must.indexOfSelectedItem;
+        Must.indexOfSelectedItem = -1;
+
+        if (indexOfEditing > -1) {
+
+            buttonFinish.setText("Edit");
+
+            // Fields for Product are always needed
+            textName.setText(Must.listOfProducts.get(indexOfEditing).getName());
+            textPrice.setText(Must.listOfProducts.get(indexOfEditing).getPrice().toString());
+            textDescription.setText(Must.listOfProducts.get(indexOfEditing).getDescription());
+            imageProduct = Must.listOfProducts.get(indexOfEditing).getImage();
+            if (imageProduct != null)
+                labelPicture.setText("Image chosen");
+
+            String s = Must.listOfProducts.get(indexOfEditing).getClass().getName();
+            if (s.equals("com.zperkowski.Must.Product")) {
+
+            } else if (s.equals("com.zperkowski.Must.Service")) {
+                comboProductChooser.setValue("Service");
+                textDuration.setText(Integer.toString(
+                        ((Service) Must.listOfProducts.get(indexOfEditing)).getDurationInHours()));
+
+
+            } else { // Instrument
+                comboProductChooser.setValue("Instrument");
+                textDiscount.setText(Integer.toString(
+                        ((Instrument) Must.listOfProducts.get(indexOfEditing)).getDiscount()));
+                textWeight.setText(Float.toString(
+                        ((Instrument) Must.listOfProducts.get(indexOfEditing)).getWeight()));
+                textBrand.setText(((Instrument) Must.listOfProducts.get(indexOfEditing)).getBrand());
+                textModel.setText(((Instrument) Must.listOfProducts.get(indexOfEditing)).getModel());
+                textGuarantee.setText(Integer.toString(
+                        ((Instrument) Must.listOfProducts.get(indexOfEditing)).getGuaranteeInMonths()));
+                checkDigital.setSelected(((Instrument) Must.listOfProducts.get(indexOfEditing)).isDigital());
+
+                if (s.equals("com.zperkowski.Must.Guitar")) {
+                    comboProductChooser.setValue("Guitar");
+                    textStrings.setText(Integer.toString(
+                            ((Guitar) Must.listOfProducts.get(indexOfEditing)).getStrings()));
+                    textFrets.setText(Integer.toString(
+                            ((Guitar) Must.listOfProducts.get(indexOfEditing)).getFrets()));
+                    comboType.setValue(((Guitar) Must.listOfProducts.get(indexOfEditing)).getType());
+
+                } else if (s.equals("com.zperkowski.Must.Keyboard")) {
+                    comboProductChooser.setValue("Keyboard");
+                    textKeys.setText(Integer.toString(
+                            ((Keyboard) Must.listOfProducts.get(indexOfEditing)).getKeys()));
+
+                } else if (s.equals("com.zperkowski.Must.Percussion")) {
+                    comboProductChooser.setValue("Percussion");
+                    checkIsSetComplete.setSelected(((Percussion) Must.listOfProducts.get(indexOfEditing)).isSetComplete());
+
+                } else if (s.equals("com.zperkowski.Must.Consoles")) {
+                    comboProductChooser.setValue("Consoles");
+                    textMaxPower.setText(Integer.toString(
+                                ((Consoles) Must.listOfProducts.get(indexOfEditing)).getMaxPower()));
+                        textChannels.setText(Integer.toString(
+                                ((Consoles) Must.listOfProducts.get(indexOfEditing)).getChannels()));
+                        textBitsOfProcessor.setText(Integer.toString(
+                                ((Consoles) Must.listOfProducts.get(indexOfEditing)).getBitsProcessor()));
+
+                } else { // Sound System
+                    comboProductChooser.setValue("SoundSystem");
+                    textMinBandwidth.setText(Integer.toString(
+                            ((SoundSystem) Must.listOfProducts.get(indexOfEditing)).getMinBandwidth()));
+                    textMaxBandwidth.setText(Integer.toString(
+                            ((SoundSystem) Must.listOfProducts.get(indexOfEditing)).getMaxBandwidth()));
+
+                    if (s.equals("com.zperkowski.Must.Speaker")) {
+                        comboProductChooser.setValue("Speaker");
+                        textRMS.setText(Integer.toString(
+                                ((Speaker) Must.listOfProducts.get(indexOfEditing)).getRms()));
+                        textImpedance.setText(Integer.toString(
+                                ((Speaker) Must.listOfProducts.get(indexOfEditing)).getImpedance()));
+
+                    } else if (s.equals("com.zperkowski.Must.Mic")) {
+                        comboProductChooser.setValue("Mic");
+                        textSensitivity.setText(Integer.toString(
+                                ((Mic) Must.listOfProducts.get(indexOfEditing)).getSensitivity()));
+                    }
+                }
+            }
+            updateModifier();
+        }
 
         // int
         textDuration.textProperty().addListener(new ChangeListener<String>() {
@@ -285,34 +374,31 @@ public class ModifierController {
             int validatedChannels = 0;
             int validatedBitsProcessor = 0;
 
+            Product tmpProduct;
+
             switch ((String) comboProductChooser.getValue()) {
                 case "Service":
                     int validatedDuration = Validation.stringToInt(textDuration.getText());
 
-                    Must.listOfProducts.add(
-                            new Service(textName.getText(),
+                    tmpProduct = new Service(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
-                                    validatedDuration)
-                    );
+                                    validatedDuration);
                     break;
                 case "Product":
-                    Must.listOfProducts.add(
-                            new Product(textName.getText(),
+                    tmpProduct = new Product(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct
-                            )
-                    );
+                            );
                     break;
                 case "Instrument":
                     validatedDiscount = Validation.stringToInt(textDiscount.getText());
                     validatedWeight = Validation.stringToFloat(textWeight.getText());
                     validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
 
-                    Must.listOfProducts.add(
-                            new Instrument(textName.getText(),
+                    tmpProduct = new Instrument(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
@@ -321,8 +407,7 @@ public class ModifierController {
                                     textBrand.getText(),
                                     textModel.getText(),
                                     validatedGuarantee,
-                                    checkDigital.isSelected())
-                    );
+                                    checkDigital.isSelected());
                     break;
                 case "Guitar":
                     validatedDiscount = Validation.stringToInt(textDiscount.getText());
@@ -331,8 +416,7 @@ public class ModifierController {
                     validatedStrings = Validation.stringToInt(textStrings.getText());
                     validatedFrets = Validation.stringToInt(textFrets.getText());
 
-                    Must.listOfProducts.add(
-                            new Guitar(textName.getText(),
+                    tmpProduct = new Guitar(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
@@ -344,8 +428,7 @@ public class ModifierController {
                                     checkDigital.isSelected(),
                                     validatedStrings,
                                     validatedFrets,
-                                    comboType.getValue().toString())
-                    );
+                                    comboType.getValue().toString());
                     break;
                 case "Keyboard":
                     validatedDiscount = Validation.stringToInt(textDiscount.getText());
@@ -353,8 +436,7 @@ public class ModifierController {
                     validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
                     validatedKeys = Validation.stringToInt(textKeys.getText());
 
-                    Must.listOfProducts.add(
-                            new Keyboard(textName.getText(),
+                    tmpProduct = new Keyboard(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
@@ -364,16 +446,14 @@ public class ModifierController {
                                     textModel.getText(),
                                     validatedGuarantee,
                                     checkDigital.isSelected(),
-                                    validatedKeys)
-                    );
+                                    validatedKeys);
                     break;
                 case "Percussion":
                     validatedDiscount = Validation.stringToInt(textDiscount.getText());
                     validatedWeight = Validation.stringToFloat(textWeight.getText());
                     validatedGuarantee = Validation.stringToInt(textGuarantee.getText());
 
-                    Must.listOfProducts.add(
-                            new Percussion(textName.getText(),
+                    tmpProduct = new Percussion(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
@@ -383,8 +463,7 @@ public class ModifierController {
                                     textModel.getText(),
                                     validatedGuarantee,
                                     checkDigital.isSelected(),
-                                    checkIsSetComplete.isSelected())
-                    );
+                                    checkIsSetComplete.isSelected());
                     break;
                 case "Sound system":
                     validatedDiscount = Validation.stringToInt(textDiscount.getText());
@@ -393,8 +472,7 @@ public class ModifierController {
                     validatedMinBandwidth = Validation.stringToInt(textMinBandwidth.getText());
                     validatedMaxBandwidth = Validation.stringToInt(textMaxBandwidth.getText());
 
-                    Must.listOfProducts.add(
-                            new SoundSystem(textName.getText(),
+                    tmpProduct = new SoundSystem(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
@@ -405,8 +483,7 @@ public class ModifierController {
                                     validatedGuarantee,
                                     checkDigital.isSelected(),
                                     validatedMinBandwidth,
-                                    validatedMaxBandwidth)
-                    );
+                                    validatedMaxBandwidth);
                     break;
                 case "Speakers":
                     validatedDiscount = Validation.stringToInt(textDiscount.getText());
@@ -417,8 +494,7 @@ public class ModifierController {
                     validatedRms = Validation.stringToInt(textRMS.getText());
                     validatedImpedance = Validation.stringToInt(textImpedance.getText());
 
-                    Must.listOfProducts.add(
-                            new Speaker(textName.getText(),
+                    tmpProduct = new Speaker(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
@@ -431,8 +507,7 @@ public class ModifierController {
                                     validatedMinBandwidth,
                                     validatedMaxBandwidth,
                                     validatedRms,
-                                    validatedImpedance)
-                    );
+                                    validatedImpedance);
                     break;
                 case "Mic":
                     validatedDiscount = Validation.stringToInt(textDiscount.getText());
@@ -442,8 +517,7 @@ public class ModifierController {
                     validatedMaxBandwidth = Validation.stringToInt(textMaxBandwidth.getText());
                     validatedSensitivity = Validation.stringToInt(textSensitivity.getText());
 
-                    Must.listOfProducts.add(
-                            new Mic(textName.getText(),
+                    tmpProduct = new Mic(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
@@ -455,8 +529,7 @@ public class ModifierController {
                                     checkDigital.isSelected(),
                                     validatedMinBandwidth,
                                     validatedMaxBandwidth,
-                                    validatedSensitivity)
-                    );
+                                    validatedSensitivity);
                     break;
                 case "Console":
                     validatedDiscount = Validation.stringToInt(textDiscount.getText());
@@ -466,8 +539,7 @@ public class ModifierController {
                     validatedChannels = Validation.stringToInt(textChannels.getText());
                     validatedBitsProcessor = Validation.stringToInt(textBitsOfProcessor.getText());
 
-                    Must.listOfProducts.add(
-                            new Consoles(textName.getText(),
+                    tmpProduct = new Consoles(textName.getText(),
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
@@ -479,10 +551,16 @@ public class ModifierController {
                                     checkDigital.isSelected(),
                                     validatedMaxPower,
                                     validatedChannels,
-                                    validatedBitsProcessor)
-                    );
+                                    validatedBitsProcessor);
                     break;
+                default:
+                    tmpProduct = new Product("Error", null, null, null);
             }
+            if (indexOfEditing > -1) {
+                Must.listOfProducts.remove(indexOfEditing);
+                Must.listOfProducts.add(indexOfEditing, tmpProduct);
+            } else
+                Must.listOfProducts.add(tmpProduct);
         }
     }
 
@@ -591,7 +669,8 @@ public class ModifierController {
 
     public void buttonPictureClicked() {
         imageProduct = openPictureDialog();
-        labelPicture.setText("Image chosen");
+        if (imageProduct != null)
+            labelPicture.setText("Image chosen");
     }
 
     /**

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class Must extends Application {
 
     static ArrayList<Product> listOfProducts = new ArrayList<>();
+    static int indexOfSelectedItem = -1;
 
     /**
      * Method looks for the {@param product} in static listOfProducts and returns index of this {@param product} in the array.
