@@ -178,7 +178,6 @@ public class ModifierController {
                 }
             }
         });
-        // TODO: Discount should stay between 5% and 50%
         // int
         textDiscount.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -186,6 +185,18 @@ public class ModifierController {
                 if (!newValue.matches("\\d*")) {
                     textDiscount.setText(newValue.replaceAll("[^\\d]", ""));
                 }
+                if (!newValue.equals("") && newValue.matches("[0-9]+"))
+                    if (Integer.parseInt(newValue) < 5) {
+                        if (oldValue == null || oldValue.equals(""))
+                            textDiscount.setText("5");
+                        else
+                            textDiscount.setText(oldValue);
+                    } else if (Integer.parseInt(newValue) > 50) {
+                        if (oldValue == null || oldValue.equals(""))
+                            textDiscount.setText("50");
+                        else
+                            textDiscount.setText(oldValue);
+                    }
             }
         });
 
