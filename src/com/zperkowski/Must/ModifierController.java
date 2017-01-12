@@ -185,18 +185,6 @@ public class ModifierController {
                 if (!newValue.matches("\\d*")) {
                     textDiscount.setText(newValue.replaceAll("[^\\d]", ""));
                 }
-                if (!newValue.equals("") && newValue.matches("[0-9]+"))
-                    if (Integer.parseInt(newValue) < 5) {
-                        if (oldValue == null || oldValue.equals(""))
-                            textDiscount.setText("5");
-                        else
-                            textDiscount.setText(oldValue);
-                    } else if (Integer.parseInt(newValue) > 50) {
-                        if (oldValue == null || oldValue.equals(""))
-                            textDiscount.setText("50");
-                        else
-                            textDiscount.setText(oldValue);
-                    }
             }
         });
 
@@ -577,24 +565,40 @@ public class ModifierController {
 
     private boolean isRequiredInformationMissing() {
         boolean isMissing = false;
+        // Name
         if (textName.getText() == null || textName.getText().trim().isEmpty()) {
             textName.setStyle("-fx-text-box-border: red;");
             isMissing = true;
         } else {
             textName.setStyle("-fx-text-box-border: lightgray;");
         }
+
+        // Price
         if (textPrice.getText() == null || textPrice.getText().trim().isEmpty()) {
             textPrice.setStyle("-fx-text-box-border: red;");
             isMissing = true;
         } else {
             textPrice.setStyle("-fx-text-box-border: lightgray;");
         }
+
+        // Duration
         if ((textDuration.getText() == null || textDuration.getText().trim().isEmpty()) && !textDuration.isDisabled()) {
             textDuration.setStyle("-fx-text-box-border: red;");
             isMissing = true;
         } else {
             textDuration.setStyle("-fx-text-box-border: lightgray;");
         }
+
+        // Discount between 5-50%
+        if (!textDiscount.getText().equals(""))
+            if (Integer.parseInt(textDiscount.getText()) < 5 || Integer.parseInt(textDiscount.getText()) > 50) {
+                textDiscount.setStyle("-fx-text-box-border: red;");
+                isMissing = true;
+            } else
+                textDiscount.setStyle("-fx-text-box-border: lightgray;");
+        else
+            textDiscount.setStyle("-fx-text-box-border: lightgray;");
+
         return isMissing;
     }
 
