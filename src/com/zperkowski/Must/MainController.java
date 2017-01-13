@@ -67,6 +67,31 @@ public class MainController {
     @FXML TextField textServiceDuration;
     @FXML TextField textServiceDescription;
 
+    // All tab
+    @FXML TableColumn tableColClass;
+    @FXML TableColumn tableColName;
+    @FXML TableColumn tableColBrand;
+    @FXML TableColumn tableColModel;
+    @FXML TableColumn tableColPrice;
+    @FXML TableColumn tableColDuration;
+    @FXML TableColumn tableColDiscount;
+    @FXML TableColumn tableColWeight;
+    @FXML TableColumn tableColGuarantee;
+    @FXML TableColumn tableColDigital;
+    @FXML TableColumn tableColStrings;
+    @FXML TableColumn tableColFrets;
+    @FXML TableColumn tableColType;
+    @FXML TableColumn tableColKeys;
+    @FXML TableColumn tableColComplete;
+    @FXML TableColumn tableColMinBandwidth;
+    @FXML TableColumn tableColMaxBandwidth;
+    @FXML TableColumn tableColRMS;
+    @FXML TableColumn tableColImpedance;
+    @FXML TableColumn tableColSensitivity;
+    @FXML TableColumn tableColMaxPower;
+    @FXML TableColumn tableColChannels;
+    @FXML TableColumn tableColBitsOfProcessor;
+
     private TreeItem<Product> rootProducts = new TreeItem<>(new Product("root", null, null, null));
     private TreeItem<Product> rootServices = new TreeItem<>(new Service("Services", null, null, null, 0));
     private TreeItem<Product> itemProducts = new TreeItem<>(new Product("Products", null, null, null));

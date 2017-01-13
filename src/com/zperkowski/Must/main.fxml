@@ -22,9 +22,9 @@
           <Menu id="fileEdit" mnemonicParsing="false" text="Edit">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#addProduct" text="Add..." />
-                  <MenuItem disable="false" onAction="#editProduct" mnemonicParsing="false" text="Edit..." />
+                  <MenuItem mnemonicParsing="false" onAction="#editProduct" text="Edit..." />
               <MenuItem id="menuEditDuplicate" disable="true" mnemonicParsing="false" text="Duplicate" />
-                  <MenuItem fx:id="menuItemRemove" disable="true" onAction="#removeProduct" mnemonicParsing="false" text="Remove" />
+                  <MenuItem fx:id="menuItemRemove" disable="true" mnemonicParsing="false" onAction="#removeProduct" text="Remove" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="updateList" mnemonicParsing="false" onAction="#updateTrees" text="Update list" />
             </items>
@@ -204,6 +204,45 @@
                   </SplitPane>
                </content>
           </Tab>
+            <Tab fx:id="tabAll" closable="false" text="All">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane prefHeight="Infinity" prefWidth="Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <TableView fx:id="tableAll">
+                                <columns>
+                                    <TableColumn fx:id="tableColClass" editable="false" prefWidth="75.0" />
+                                    <TableColumn fx:id="tableColName" editable="false" prefWidth="75.0" text="Name" />
+                                    <TableColumn fx:id="tableColBrand" editable="false" prefWidth="75.0" text="Brand" />
+                                    <TableColumn fx:id="tableColModel" editable="false" prefWidth="75.0" text="Model" />
+                                    <TableColumn fx:id="tableColPrice" editable="false" prefWidth="75.0" text="Price" />
+                                    <TableColumn fx:id="tableColDuration" editable="false" prefWidth="75.0" text="Duration" />
+                                    <TableColumn fx:id="tableColDiscount" editable="false" prefWidth="75.0" text="Discount" />
+                                    <TableColumn fx:id="tableColWeight" editable="false" prefWidth="75.0" text="Weight" />
+                                    <TableColumn fx:id="tableColGuarantee" editable="false" prefWidth="75.0" text="Guarantee" />
+                                    <TableColumn fx:id="tableColDigital" editable="false" prefWidth="75.0" text="Digital" />
+                                    <TableColumn fx:id="tableColStrings" editable="false" prefWidth="75.0" text="Strings" />
+                                    <TableColumn fx:id="tableColFrets" editable="false" prefWidth="75.0" text="Frets" />
+                                    <TableColumn fx:id="tableColType" editable="false" prefWidth="75.0" text="Type" />
+                                    <TableColumn fx:id="tableColKeys" editable="false" prefWidth="75.0" text="Keys" />
+                                    <TableColumn fx:id="tableColComplete" editable="false" prefWidth="75.0" text="Complete" />
+                                    <TableColumn fx:id="tableColMinBandwidth" editable="false" prefWidth="75.0" text="Min bandwidth" />
+                                    <TableColumn fx:id="tableColMaxBandwidth" editable="false" prefWidth="75.0" text="Max bandwidth" />
+                                    <TableColumn fx:id="tableColRMS" editable="false" prefWidth="75.0" text="RMS" />
+                                    <TableColumn fx:id="tableColImpedance" editable="false" prefWidth="75.0" text="Impedance" />
+                                    <TableColumn fx:id="tableColSensitivity" editable="false" prefWidth="75.0" text="Sensitivity" />
+                                    <TableColumn fx:id="tableColMaxPower" editable="false" prefWidth="75.0" text="Max power" />
+                                    <TableColumn fx:id="tableColChannels" editable="false" prefWidth="75.0" text="Channels" />
+                                    <TableColumn fx:id="tableColBitsOfProcessor" editable="false" prefWidth="75.0" text="Bits of processor" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </center>
