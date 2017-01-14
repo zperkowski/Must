@@ -26,7 +26,7 @@
               <MenuItem id="menuEditDuplicate" disable="true" mnemonicParsing="false" text="Duplicate" />
                   <MenuItem fx:id="menuItemRemove" disable="true" mnemonicParsing="false" onAction="#removeProduct" text="Remove" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="updateList" mnemonicParsing="false" onAction="#updateTrees" text="Update list" />
+                  <MenuItem fx:id="updateList" mnemonicParsing="false" onAction="#update" text="Update list" />
             </items>
           </Menu>
           <Menu id="fileHelp" mnemonicParsing="false" text="Help">
@@ -212,7 +212,6 @@
                            <content>
                               <TableView fx:id="tableAll">
                                 <columns>
-                                    <TableColumn fx:id="tableColClass" editable="false" prefWidth="75.0" />
                                     <TableColumn fx:id="tableColName" editable="false" prefWidth="75.0" text="Name" />
                                     <TableColumn fx:id="tableColBrand" editable="false" prefWidth="75.0" text="Brand" />
                                     <TableColumn fx:id="tableColModel" editable="false" prefWidth="75.0" text="Model" />

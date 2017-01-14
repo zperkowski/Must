@@ -2,11 +2,14 @@ package com.zperkowski.Must;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -68,7 +71,7 @@ public class MainController {
     @FXML TextField textServiceDescription;
 
     // All tab
-    @FXML TableColumn tableColClass;
+    @FXML TableView tableAll;
     @FXML TableColumn tableColName;
     @FXML TableColumn tableColBrand;
     @FXML TableColumn tableColModel;
@@ -157,6 +160,74 @@ public class MainController {
                 }
             }
         );
+
+        // Set TableView
+        tableColName.setCellValueFactory(
+                new PropertyValueFactory<Product,String>("name")
+        );
+         tableColBrand.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("brand")
+         );
+         tableColModel.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("model")
+         );
+         tableColPrice.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("price")
+         );
+         tableColDuration.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("durationInHours")
+         );
+         tableColDiscount.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("discount")
+         );
+         tableColWeight.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("weight")
+         );
+         tableColGuarantee.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("guaranteeInMonths")
+         );
+         tableColDigital.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("guaranteeInMonths")
+         );
+         tableColStrings.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("strings")
+         );
+         tableColFrets.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("frets")
+         );
+         tableColType.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("type")
+         );
+         tableColKeys.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("keys")
+         );
+         tableColComplete.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("isSetComplete")
+         );
+         tableColMinBandwidth.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("minBandwidth")
+         );
+         tableColMaxBandwidth.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("maxBandwidth")
+         );
+         tableColRMS.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("rms")
+         );
+         tableColImpedance.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("impedance")
+         );
+         tableColSensitivity.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("sensitivity")
+         );
+         tableColMaxPower.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("maxPower")
+         );
+         tableColChannels.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("channels")
+         );
+         tableColBitsOfProcessor.setCellValueFactory(
+                 new PropertyValueFactory<Product,String>("bitsProcessor")
+         );
     }
 
     public void addProduct() {
@@ -191,7 +262,7 @@ public class MainController {
                     if (index > -1)
                         Must.listOfProducts.remove(index);
                 }
-            updateTrees();
+            update();
         }
     }
 
@@ -211,7 +282,7 @@ public class MainController {
             stageModifier.setMinHeight(505);
             stageModifier.setMinWidth(430);
             stageModifier.show();
-            stageModifier.setOnCloseRequest(event -> updateTrees());
+            stageModifier.setOnCloseRequest(event -> update());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -264,7 +335,7 @@ public class MainController {
                 e.printStackTrace();
             }
         }
-        updateTrees();
+        update();
     }
 
     public void closeApp() {
@@ -297,6 +368,11 @@ public class MainController {
         rootServices.setExpanded(true);
     }
 
+    public void update() {
+        updateTrees();
+        updateTables();
+    }
+
     private void clearTrees() {
         rootServices.getChildren().clear();
         itemProducts.getChildren().clear();
@@ -310,7 +386,7 @@ public class MainController {
         itemConsoles.getChildren().clear();
     }
 
-    public void updateTrees() {
+    private void updateTrees() {
         clearTrees();
 
         for (int i = 0; i < Must.listOfProducts.size(); i++) {
@@ -349,6 +425,12 @@ public class MainController {
                     break;
             }
         }
+    }
+
+    public void updateTables() {
+        ObservableList<Product> observableList = FXCollections.observableArrayList();
+        observableList.addAll(Must.listOfProducts);
+        tableAll.setItems(observableList);
     }
 
     private void clearDetails() {

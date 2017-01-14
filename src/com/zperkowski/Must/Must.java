@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * */
 public class Must extends Application {
 
-    static ArrayList<Product> listOfProducts = new ArrayList<>();
+    static public ArrayList<Product> listOfProducts = new ArrayList<>();
     static int indexOfSelectedItem = -1;
 
     /**
