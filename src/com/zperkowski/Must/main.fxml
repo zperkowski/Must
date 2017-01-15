@@ -248,8 +248,8 @@
    <bottom>
       <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
          <items>
-            <TextField id="searchTextField" disable="true" />
-            <Button id="searchButton" disable="true" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" prefWidth="70.0" text="Search" />
+            <TextField id="searchTextField" fx:id="textSearch" />
+            <Button id="searchButton" onAction="#update" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" prefWidth="70.0" text="Search" />
          </items>
       </SplitPane>
    </bottom>

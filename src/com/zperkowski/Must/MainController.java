@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -94,6 +96,8 @@ public class MainController {
     @FXML TableColumn tableColMaxPower;
     @FXML TableColumn tableColChannels;
     @FXML TableColumn tableColBitsOfProcessor;
+
+    @FXML TextField textSearch;
 
     private TreeItem<Product> rootProducts = new TreeItem<>(new Product("root", null, null, null));
     private TreeItem<Product> rootServices = new TreeItem<>(new Service("Services", null, null, null, 0));
@@ -369,8 +373,24 @@ public class MainController {
     }
 
     public void update() {
-        updateTrees();
-        updateTables();
+        if (textSearch.getText().trim() == "") {
+            updateTrees(Must.listOfProducts);
+            updateTables(Must.listOfProducts);
+        } else {
+            ObservableList<Product> observableList = FXCollections.observableList(Must.listOfProducts);
+            FilteredList<Product> filteredList = new FilteredList<>(observableList, s -> true);
+
+            String filter = textSearch.getText().trim();
+            if(filter == null || filter.length() == 0) {
+                filteredList.setPredicate(s -> true);
+            }
+            else {
+                filteredList.setPredicate(s -> s.getName().contains(filter));
+            }
+
+            updateTables(filteredList);
+            updateTrees(filteredList);
+        }
     }
 
     private void clearTrees() {
@@ -386,11 +406,11 @@ public class MainController {
         itemConsoles.getChildren().clear();
     }
 
-    private void updateTrees() {
+    private void updateTrees(List<Product> list) {
         clearTrees();
 
-        for (int i = 0; i < Must.listOfProducts.size(); i++) {
-            TreeItem<Product> item = new TreeItem<>(Must.listOfProducts.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            TreeItem<Product> item = new TreeItem<>(list.get(i));
 
             switch (Must.listOfProducts.get(i).getClass().getName()) {
                 case "com.zperkowski.Must.Service":
@@ -427,9 +447,9 @@ public class MainController {
         }
     }
 
-    public void updateTables() {
+    public void updateTables(List<Product> list) {
         ObservableList<Product> observableList = FXCollections.observableArrayList();
-        observableList.addAll(Must.listOfProducts);
+        observableList.addAll(list);
         tableAll.setItems(observableList);
     }
 
