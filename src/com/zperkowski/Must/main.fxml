@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zperkowski.Must.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zperkowski.Must.MainController">
    <top>
       <MenuBar id="menuBar" BorderPane.alignment="CENTER">
         <menus>
@@ -72,6 +73,7 @@
                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -96,30 +98,42 @@
                                        <TextField fx:id="textProductGuarantee" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                        <CheckBox fx:id="checkProductDigital" disable="true" mnemonicParsing="false" text="Is digital?" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                        <CheckBox fx:id="checkProductIsSetComplete" disable="true" mnemonicParsing="false" text="Is the set complete?" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                       <Label text="Discount" GridPane.rowIndex="4" />
-                                       <TextField fx:id="textProductDiscount" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                       <Label text="Strings" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                       <TextField fx:id="textProductStrings" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                       <Label text="Frets" GridPane.rowIndex="5" />
-                                       <TextField fx:id="textProductFrets" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                       <Label text="Keys" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                       <TextField fx:id="textProductKeys" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                       <Label text="Mininal bandwidth" GridPane.rowIndex="6" />
-                                       <TextField fx:id="textProductMinBandwidth" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                       <Label text="Maximal bandwidth" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                       <TextField fx:id="textProductMaxBandwidth" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                                       <Label text="Impedance" GridPane.rowIndex="7" />
-                                       <TextField fx:id="textProductImpedance" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                       <Label text="RMS" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                                       <TextField fx:id="textProductRMS" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                       <Label text="Sensitivity" GridPane.rowIndex="8" />
-                                       <TextField fx:id="textProductSensitivity" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                       <Label text="Maximal power" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                                       <TextField fx:id="textProductMaxPower" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                                       <Label text="Channels" GridPane.rowIndex="9" />
-                                       <TextField fx:id="textProductChannels" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                       <Label text="Bits of processor" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                                       <TextField fx:id="textProductBitsOfProcessor" disable="true" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                       <Label text="Discount starts at" wrapText="true" GridPane.rowIndex="4">
+                                           <font>
+                                               <Font size="12.0" />
+                                           </font>
+                                       </Label>
+                                       <Label text="Discount ends at" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                           <font>
+                                               <Font size="12.0" />
+                                           </font>
+                                       </Label>
+                                       <DatePicker fx:id="dateDiscountStart" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                       <DatePicker fx:id="dateDiscountEnd" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                       <Label text="Discount" GridPane.rowIndex="5" />
+                                       <TextField fx:id="textProductDiscount" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                       <Label text="Strings" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                       <TextField fx:id="textProductStrings" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                       <Label text="Frets" GridPane.rowIndex="6" />
+                                       <TextField fx:id="textProductFrets" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                       <Label text="Keys" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                       <TextField fx:id="textProductKeys" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                       <Label text="Minimal bandwidth" GridPane.rowIndex="7" />
+                                       <TextField fx:id="textProductMinBandwidth" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                       <Label text="Maximal bandwidth" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                       <TextField fx:id="textProductMaxBandwidth" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                       <Label text="Impedance" GridPane.rowIndex="8" />
+                                       <TextField fx:id="textProductImpedance" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                       <Label text="RMS" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                       <TextField fx:id="textProductRMS" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                       <Label text="Sensitivity" GridPane.rowIndex="9" />
+                                       <TextField fx:id="textProductSensitivity" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                       <Label text="Maximal power" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                       <TextField fx:id="textProductMaxPower" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                       <Label text="Channels" GridPane.rowIndex="10" />
+                                       <TextField fx:id="textProductChannels" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                       <Label text="Bits of processor" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                                       <TextField fx:id="textProductBitsOfProcessor" disable="true" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="10" />
                                    </children>
                                    <opaqueInsets>
                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -205,42 +219,34 @@
                </content>
           </Tab>
             <Tab fx:id="tabAll" closable="false" text="All">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane prefHeight="Infinity" prefWidth="Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <content>
-                              <TableView fx:id="tableAll">
-                                <columns>
-                                    <TableColumn fx:id="tableColName" editable="false" prefWidth="75.0" text="Name" />
-                                    <TableColumn fx:id="tableColBrand" editable="false" prefWidth="75.0" text="Brand" />
-                                    <TableColumn fx:id="tableColModel" editable="false" prefWidth="75.0" text="Model" />
-                                    <TableColumn fx:id="tableColPrice" editable="false" prefWidth="75.0" text="Price" />
-                                    <TableColumn fx:id="tableColDuration" editable="false" prefWidth="75.0" text="Duration" />
-                                    <TableColumn fx:id="tableColDiscount" editable="false" prefWidth="75.0" text="Discount" />
-                                    <TableColumn fx:id="tableColWeight" editable="false" prefWidth="75.0" text="Weight" />
-                                    <TableColumn fx:id="tableColGuarantee" editable="false" prefWidth="75.0" text="Guarantee" />
-                                    <TableColumn fx:id="tableColDigital" editable="false" prefWidth="75.0" text="Digital" />
-                                    <TableColumn fx:id="tableColStrings" editable="false" prefWidth="75.0" text="Strings" />
-                                    <TableColumn fx:id="tableColFrets" editable="false" prefWidth="75.0" text="Frets" />
-                                    <TableColumn fx:id="tableColType" editable="false" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="tableColKeys" editable="false" prefWidth="75.0" text="Keys" />
-                                    <TableColumn fx:id="tableColComplete" editable="false" prefWidth="75.0" text="Complete" />
-                                    <TableColumn fx:id="tableColMinBandwidth" editable="false" prefWidth="75.0" text="Min bandwidth" />
-                                    <TableColumn fx:id="tableColMaxBandwidth" editable="false" prefWidth="75.0" text="Max bandwidth" />
-                                    <TableColumn fx:id="tableColRMS" editable="false" prefWidth="75.0" text="RMS" />
-                                    <TableColumn fx:id="tableColImpedance" editable="false" prefWidth="75.0" text="Impedance" />
-                                    <TableColumn fx:id="tableColSensitivity" editable="false" prefWidth="75.0" text="Sensitivity" />
-                                    <TableColumn fx:id="tableColMaxPower" editable="false" prefWidth="75.0" text="Max power" />
-                                    <TableColumn fx:id="tableColChannels" editable="false" prefWidth="75.0" text="Channels" />
-                                    <TableColumn fx:id="tableColBitsOfProcessor" editable="false" prefWidth="75.0" text="Bits of processor" />
-                                </columns>
-                              </TableView>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-              </content>
+               <content>
+                  <TableView fx:id="tableAll">
+                    <columns>
+                        <TableColumn fx:id="tableColName" editable="false" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="tableColBrand" editable="false" prefWidth="75.0" text="Brand" />
+                        <TableColumn fx:id="tableColModel" editable="false" prefWidth="75.0" text="Model" />
+                        <TableColumn fx:id="tableColPrice" editable="false" prefWidth="75.0" text="Price" />
+                        <TableColumn fx:id="tableColDuration" editable="false" prefWidth="75.0" text="Duration" />
+                        <TableColumn fx:id="tableColDiscount" editable="false" prefWidth="75.0" text="Discount" />
+                        <TableColumn fx:id="tableColWeight" editable="false" prefWidth="75.0" text="Weight" />
+                        <TableColumn fx:id="tableColGuarantee" editable="false" prefWidth="75.0" text="Guarantee" />
+                        <TableColumn fx:id="tableColDigital" editable="false" prefWidth="75.0" text="Digital" />
+                        <TableColumn fx:id="tableColStrings" editable="false" prefWidth="75.0" text="Strings" />
+                        <TableColumn fx:id="tableColFrets" editable="false" prefWidth="75.0" text="Frets" />
+                        <TableColumn fx:id="tableColType" editable="false" prefWidth="75.0" text="Type" />
+                        <TableColumn fx:id="tableColKeys" editable="false" prefWidth="75.0" text="Keys" />
+                        <TableColumn fx:id="tableColComplete" editable="false" prefWidth="75.0" text="Complete" />
+                        <TableColumn fx:id="tableColMinBandwidth" editable="false" prefWidth="75.0" text="Min bandwidth" />
+                        <TableColumn fx:id="tableColMaxBandwidth" editable="false" prefWidth="75.0" text="Max bandwidth" />
+                        <TableColumn fx:id="tableColRMS" editable="false" prefWidth="75.0" text="RMS" />
+                        <TableColumn fx:id="tableColImpedance" editable="false" prefWidth="75.0" text="Impedance" />
+                        <TableColumn fx:id="tableColSensitivity" editable="false" prefWidth="75.0" text="Sensitivity" />
+                        <TableColumn fx:id="tableColMaxPower" editable="false" prefWidth="75.0" text="Max power" />
+                        <TableColumn fx:id="tableColChannels" editable="false" prefWidth="75.0" text="Channels" />
+                        <TableColumn fx:id="tableColBitsOfProcessor" editable="false" prefWidth="75.0" text="Bits of processor" />
+                    </columns>
+                  </TableView>
+               </content>
             </Tab>
         </tabs>
       </TabPane>
@@ -249,7 +255,7 @@
       <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
          <items>
             <TextField id="searchTextField" fx:id="textSearch" />
-            <Button id="searchButton" onAction="#update" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" prefWidth="70.0" text="Search" />
+            <Button id="searchButton" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" onAction="#update" prefWidth="70.0" text="Search" />
          </items>
       </SplitPane>
    </bottom>

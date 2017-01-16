@@ -51,6 +51,8 @@ public class MainController {
     @FXML TextField textProductGuarantee;
     @FXML CheckBox checkProductDigital;
     @FXML CheckBox checkProductIsSetComplete;
+    @FXML DatePicker dateDiscountStart;
+    @FXML DatePicker dateDiscountEnd;
     @FXML TextField textProductDiscount;
     @FXML TextField textProductStrings;
     @FXML TextField textProductFrets;

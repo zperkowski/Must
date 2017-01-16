@@ -30,6 +30,8 @@ public class ModifierController {
     public TextField textWeight;
     public CheckBox checkDigital;
     public CheckBox checkIsSetComplete;
+    public DatePicker dateDiscountStart;
+    public DatePicker dateDiscountEnd;
     public TextField textDiscount;
     public TextField textStrings;
     public TextField textFrets;
@@ -614,6 +616,8 @@ public class ModifierController {
         textWeight.setDisable(true);
         checkDigital.setDisable(true);
         checkIsSetComplete.setDisable(true);
+        dateDiscountStart.setDisable(true);
+        dateDiscountEnd.setDisable(true);
         textDiscount.setDisable(true);
         textStrings.setDisable(true);
         textFrets.setDisable(true);
