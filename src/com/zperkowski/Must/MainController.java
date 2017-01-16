@@ -242,11 +242,16 @@ public class MainController {
     }
 
     public void editProduct() {
-        if (tabProducts.isSelected())
-            Must.indexOfSelectedItem = Must.searchInListOfProducts(treeProducts.getSelectionModel().getSelectedItems().get(0).getValue());
-        else if (tabServices.isSelected())
-            Must.indexOfSelectedItem = Must.searchInListOfProducts(treeServices.getSelectionModel().getSelectedItems().get(0).getValue());
-        displayModifier();
+        try {
+            if (tabProducts.isSelected())
+                Must.indexOfSelectedItem = Must.searchInListOfProducts(treeProducts.getSelectionModel().getSelectedItems().get(0).getValue());
+            else if (tabServices.isSelected())
+                Must.indexOfSelectedItem = Must.searchInListOfProducts(treeServices.getSelectionModel().getSelectedItems().get(0).getValue());
+            if (Must.indexOfSelectedItem != -1)
+                displayModifier();
+        } catch (NullPointerException e) {
+            Must.indexOfSelectedItem = -1;
+        }
     }
 
     public void removeProduct() {
@@ -379,6 +384,7 @@ public class MainController {
             updateTrees(Must.listOfProducts);
             updateTables(Must.listOfProducts);
         } else {
+            // TODO: Find a way do edit selected items. Use Must.searchInListOfProducts?
             ObservableList<Product> observableList = FXCollections.observableList(Must.listOfProducts);
             FilteredList<Product> filteredList = new FilteredList<>(observableList, s -> true);
 
@@ -514,7 +520,6 @@ public class MainController {
 
     private void fillDetailOfProduct(Guitar product) {
         if (product.getPrice() != null) {
-            fillDetailOfProduct( (Product) product);
             fillDetailOfProduct( (Instrument) product);
             textProductStrings.setText(Integer.toString(product.getStrings()));
             textProductFrets.setText(Integer.toString(product.getFrets()));
@@ -524,7 +529,6 @@ public class MainController {
 
     private void fillDetailOfProduct(Keyboard product) {
         if (product.getPrice() != null) {
-            fillDetailOfProduct( (Product) product);
             fillDetailOfProduct( (Instrument) product);
             textProductKeys.setText(Integer.toString(product.getKeys()));
         }
@@ -532,7 +536,6 @@ public class MainController {
 
     private void fillDetailOfProduct(Percussion product) {
         if (product.getPrice() != null) {
-            fillDetailOfProduct( (Product) product);
             fillDetailOfProduct( (Instrument) product);
             checkProductIsSetComplete.setSelected(product.isSetComplete());
         }
@@ -540,7 +543,6 @@ public class MainController {
 
     private void fillDetailOfProduct(SoundSystem product) {
         if (product.getPrice() != null) {
-            fillDetailOfProduct( (Product) product);
             fillDetailOfProduct( (Instrument) product);
             textProductMinBandwidth.setText(Integer.toString(product.getMinBandwidth()));
             textProductMaxBandwidth.setText(Integer.toString(product.getMaxBandwidth()));
@@ -549,8 +551,6 @@ public class MainController {
 
     private void fillDetailOfProduct(Speaker product) {
         if (product.getPrice() != null) {
-            fillDetailOfProduct( (Product) product);
-            fillDetailOfProduct( (Instrument) product);
             fillDetailOfProduct( (SoundSystem) product);
             textProductRMS.setText(Integer.toString(product.getRms()));
             textProductImpedance.setText(Integer.toString(product.getImpedance()));
@@ -559,8 +559,6 @@ public class MainController {
 
     private void fillDetailOfProduct(Mic product) {
         if (product.getPrice() != null) {
-            fillDetailOfProduct( (Product) product);
-            fillDetailOfProduct( (Instrument) product);
             fillDetailOfProduct( (SoundSystem) product);
             textProductSensitivity.setText(Integer.toString(product.getSensitivity()));
         }
@@ -568,7 +566,6 @@ public class MainController {
 
     private void fillDetailOfProduct(Consoles product) {
         if (product.getPrice() != null) {
-            fillDetailOfProduct( (Product) product);
             fillDetailOfProduct( (Instrument) product);
             textProductMaxPower.setText(Integer.toString(product.getMaxPower()));
             textProductChannels.setText(Integer.toString(product.getChannels()));

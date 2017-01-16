@@ -69,7 +69,7 @@ public class ModifierController {
             imageProduct = Must.listOfProducts.get(indexOfEditing).getImage();
             if (imageProduct != null)
                 labelPicture.setText("Image chosen");
-
+            // TODO: Refactor to separate methods like in MainController.fillDetailOfProduct
             String s = Must.listOfProducts.get(indexOfEditing).getClass().getName();
             if (s.equals("com.zperkowski.Must.Product")) {
 
@@ -356,6 +356,7 @@ public class ModifierController {
         }
     }
 
+    // TODO: Refactor
     public void doneButtonClicked() {
         if (!isRequiredInformationMissing()) {
             // Variables below have to be validated
@@ -557,6 +558,7 @@ public class ModifierController {
                 default:
                     tmpProduct = new Product("Error", null, null, null);
             }
+            // TODO: Create better way to decide between adding and editing
             if (indexOfEditing > -1) {
                 Must.listOfProducts.remove(indexOfEditing);
                 Must.listOfProducts.add(indexOfEditing, tmpProduct);
@@ -603,7 +605,7 @@ public class ModifierController {
 
         return isMissing;
     }
-
+    // TODO: Add DatePickers to setAllDisabled()
     /**
      * Sets all controls to disabled mode.
      */
@@ -632,7 +634,8 @@ public class ModifierController {
         textBitsOfProcessor.setDisable(true);
         textDescription.setDisable(true);
     }
-
+    // TODO: Refactor like in MainController.fillDetailOfProduct
+    // TODO: Add DatePickers to refactored activators
     private void activateProduct() {
         textName.setDisable(false);
         textPrice.setDisable(false);
