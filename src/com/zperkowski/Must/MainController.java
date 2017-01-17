@@ -34,8 +34,14 @@ public class MainController {
     @FXML
     Tab tabServices;
 
+    /**
+     * Shows all objects of {@link Product} or a subclass (except for Service).
+     * */
     @FXML
     TreeView<Product> treeProducts;
+    /**
+     * Shows objects of {@link Service}.
+     * */
     @FXML
     TreeView<Product> treeServices;
 
@@ -75,6 +81,9 @@ public class MainController {
     @FXML TextField textServiceDescription;
 
     // All tab
+    /**
+     * Shows all objects of {@link Product} in a TableView.
+     * */
     @FXML TableView tableAll;
     @FXML TableColumn tableColName;
     @FXML TableColumn tableColBrand;
@@ -113,7 +122,11 @@ public class MainController {
     private TreeItem<Product> itemMics = new TreeItem<>(new Product("Mics", null, null, null));
     private TreeItem<Product> itemConsoles = new TreeItem<>(new Product("Consoles", null, null, null));
 
-
+    /**
+     * Initializes two listeners for TreeView {@link #treeProducts} and {@link #treeServices}, connects appropriate columns in the TableView {@link #tableAll} to fields of a object of Product or a subclass.
+     *
+     * When a item in TreeView treeProducts is selected, fills appropriate fields with a Product(or a subclass) details placed in the selected item.
+     */
     @FXML
     public void initialize() {
         initTreeProducts();
@@ -455,7 +468,7 @@ public class MainController {
         }
     }
 
-    public void updateTables(List<Product> list) {
+    private void updateTables(List<Product> list) {
         ObservableList<Product> observableList = FXCollections.observableArrayList();
         observableList.addAll(list);
         tableAll.setItems(observableList);

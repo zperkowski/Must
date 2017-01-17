@@ -19,14 +19,14 @@ public class ModifierController {
 
     @FXML
     public Button buttonFinish;
-    public ComboBox comboProductChooser;
+    public ComboBox<String> comboProductChooser;
     public TextField textDuration;
     public TextField textName;
     public TextField textPrice;
     public TextField textBrand;
     public TextField textModel;
     public TextField textGuarantee;
-    public ComboBox comboType;
+    public ComboBox<String> comboType;
     public TextField textWeight;
     public CheckBox checkDigital;
     public CheckBox checkIsSetComplete;
@@ -59,85 +59,52 @@ public class ModifierController {
         Must.indexOfSelectedItem = -1;
 
         if (indexOfEditing > -1) {
-
             buttonFinish.setText("Edit");
 
-            // Fields for Product are always needed
-            textName.setText(Must.listOfProducts.get(indexOfEditing).getName());
-            textPrice.setText(Must.listOfProducts.get(indexOfEditing).getPrice().toString());
-            textDescription.setText(Must.listOfProducts.get(indexOfEditing).getDescription());
-            imageProduct = Must.listOfProducts.get(indexOfEditing).getImage();
-            if (imageProduct != null)
-                labelPicture.setText("Image chosen");
-            // TODO: Refactor to separate methods like in MainController.fillDetailOfProduct
-            String s = Must.listOfProducts.get(indexOfEditing).getClass().getName();
-            if (s.equals("com.zperkowski.Must.Product")) {
+            Product editingProduct = Must.listOfProducts.get(indexOfEditing);
 
-            } else if (s.equals("com.zperkowski.Must.Service")) {
-                comboProductChooser.setValue("Service");
-                textDuration.setText(Integer.toString(
-                        ((Service) Must.listOfProducts.get(indexOfEditing)).getDurationInHours()));
-
-
-            } else { // Instrument
-                comboProductChooser.setValue("Instrument");
-                textDiscount.setText(Integer.toString(
-                        ((Instrument) Must.listOfProducts.get(indexOfEditing)).getDiscount()));
-                textWeight.setText(Float.toString(
-                        ((Instrument) Must.listOfProducts.get(indexOfEditing)).getWeight()));
-                textBrand.setText(((Instrument) Must.listOfProducts.get(indexOfEditing)).getBrand());
-                textModel.setText(((Instrument) Must.listOfProducts.get(indexOfEditing)).getModel());
-                textGuarantee.setText(Integer.toString(
-                        ((Instrument) Must.listOfProducts.get(indexOfEditing)).getGuaranteeInMonths()));
-                checkDigital.setSelected(((Instrument) Must.listOfProducts.get(indexOfEditing)).isDigital());
-
-                if (s.equals("com.zperkowski.Must.Guitar")) {
+            switch (editingProduct.getClass().getName()) {
+                case "com.zperkowski.Must.Product":
+                    comboProductChooser.setValue("Product");
+                    fillDetailOfProduct(editingProduct);
+                    break;
+                case "com.zperkowski.Must.Service":
+                    comboProductChooser.setValue("Service");
+                    fillDetailOfProduct((Service) editingProduct);
+                case "com.zperkowski.Must.Instrument":
+                    comboProductChooser.setValue("Instrument");
+                    fillDetailOfProduct((Instrument) editingProduct);
+                    break;
+                case "com.zperkowski.Must.Guitar":
                     comboProductChooser.setValue("Guitar");
-                    textStrings.setText(Integer.toString(
-                            ((Guitar) Must.listOfProducts.get(indexOfEditing)).getStrings()));
-                    textFrets.setText(Integer.toString(
-                            ((Guitar) Must.listOfProducts.get(indexOfEditing)).getFrets()));
-                    comboType.setValue(((Guitar) Must.listOfProducts.get(indexOfEditing)).getType());
-
-                } else if (s.equals("com.zperkowski.Must.Keyboard")) {
+                    fillDetailOfProduct((Guitar) editingProduct);
+                    break;
+                case "com.zperkowski.Must.Keyboard":
                     comboProductChooser.setValue("Keyboard");
-                    textKeys.setText(Integer.toString(
-                            ((Keyboard) Must.listOfProducts.get(indexOfEditing)).getKeys()));
-
-                } else if (s.equals("com.zperkowski.Must.Percussion")) {
+                    fillDetailOfProduct((Keyboard) editingProduct);
+                    break;
+                case "com.zperkowski.Must.Percussion":
                     comboProductChooser.setValue("Percussion");
-                    checkIsSetComplete.setSelected(((Percussion) Must.listOfProducts.get(indexOfEditing)).isSetComplete());
-
-                } else if (s.equals("com.zperkowski.Must.Consoles")) {
-                    comboProductChooser.setValue("Consoles");
-                    textMaxPower.setText(Integer.toString(
-                                ((Consoles) Must.listOfProducts.get(indexOfEditing)).getMaxPower()));
-                        textChannels.setText(Integer.toString(
-                                ((Consoles) Must.listOfProducts.get(indexOfEditing)).getChannels()));
-                        textBitsOfProcessor.setText(Integer.toString(
-                                ((Consoles) Must.listOfProducts.get(indexOfEditing)).getBitsProcessor()));
-
-                } else { // Sound System
+                    fillDetailOfProduct((Percussion) editingProduct);
+                    break;
+                case "com.zperkowski.Must.SoundSystem":
                     comboProductChooser.setValue("SoundSystem");
-                    textMinBandwidth.setText(Integer.toString(
-                            ((SoundSystem) Must.listOfProducts.get(indexOfEditing)).getMinBandwidth()));
-                    textMaxBandwidth.setText(Integer.toString(
-                            ((SoundSystem) Must.listOfProducts.get(indexOfEditing)).getMaxBandwidth()));
-
-                    if (s.equals("com.zperkowski.Must.Speaker")) {
-                        comboProductChooser.setValue("Speaker");
-                        textRMS.setText(Integer.toString(
-                                ((Speaker) Must.listOfProducts.get(indexOfEditing)).getRms()));
-                        textImpedance.setText(Integer.toString(
-                                ((Speaker) Must.listOfProducts.get(indexOfEditing)).getImpedance()));
-
-                    } else if (s.equals("com.zperkowski.Must.Mic")) {
-                        comboProductChooser.setValue("Mic");
-                        textSensitivity.setText(Integer.toString(
-                                ((Mic) Must.listOfProducts.get(indexOfEditing)).getSensitivity()));
-                    }
-                }
+                    fillDetailOfProduct((SoundSystem) editingProduct);
+                    break;
+                case "com.zperkowski.Must.Speaker":
+                    comboProductChooser.setValue("Speaker");
+                    fillDetailOfProduct((Speaker) editingProduct);
+                    break;
+                case "com.zperkowski.Must.Mic":
+                    comboProductChooser.setValue("Mic");
+                    fillDetailOfProduct((Mic) editingProduct);
+                    break;
+                case "com.zperkowski.Must.Consoles":
+                    comboProductChooser.setValue("Consoles");
+                    fillDetailOfProduct((Consoles) editingProduct);
+                    break;
             }
+
             updateModifier();
         }
 
@@ -301,10 +268,82 @@ public class ModifierController {
         });
     }
 
+    private void fillDetailOfProduct(Product product) {
+        textName.setText(product.getName());
+        textPrice.setText(product.getPrice().toString());
+        textDescription.setText(product.getDescription());
+        imageProduct = product.getImage();
+        if (imageProduct != null)
+            labelPicture.setText("Image chosen");
+    }
+
+    private void fillDetailOfProduct(Service service) {
+        fillDetailOfProduct((Product) service);
+        textDuration.setText(Integer.toString(service.getDurationInHours()));
+
+    }
+
+    private void fillDetailOfProduct(Instrument instrument) {
+        fillDetailOfProduct((Product) instrument);
+        textDiscount.setText(Integer.toString(instrument.getDiscount()));
+        textWeight.setText(Float.toString(instrument.getWeight()));
+        textBrand.setText(instrument.getBrand());
+        textModel.setText(instrument.getModel());
+        textGuarantee.setText(Integer.toString(instrument.getGuaranteeInMonths()));
+        checkDigital.setSelected(instrument.isDigital());
+
+    }
+
+    private void fillDetailOfProduct(Guitar guitar) {
+        fillDetailOfProduct((Instrument) guitar);
+        textStrings.setText(Integer.toString(guitar.getStrings()));
+        textFrets.setText(Integer.toString(guitar.getFrets()));
+        comboType.setValue(guitar.getType());
+
+    }
+
+    private void fillDetailOfProduct(Keyboard keyboard) {
+        fillDetailOfProduct((Instrument) keyboard);
+        textKeys.setText(Integer.toString(keyboard.getKeys()));
+
+    }
+
+    private void fillDetailOfProduct(Percussion percussion) {
+        fillDetailOfProduct((Instrument) percussion);
+        checkIsSetComplete.setSelected(percussion.isSetComplete());
+
+    }
+
+    private void fillDetailOfProduct(SoundSystem soundSystem) {
+        fillDetailOfProduct((Instrument) soundSystem);
+        textMinBandwidth.setText(Integer.toString(soundSystem.getMinBandwidth()));
+        textMaxBandwidth.setText(Integer.toString(soundSystem.getMaxBandwidth()));
+
+    }
+
+    private void fillDetailOfProduct(Speaker speaker) {
+        fillDetailOfProduct((SoundSystem) speaker);
+        textRMS.setText(Integer.toString(speaker.getRms()));
+        textImpedance.setText(Integer.toString(speaker.getImpedance()));
+
+    }
+
+    private void fillDetailOfProduct(Mic mic) {
+        fillDetailOfProduct((SoundSystem) mic);
+        textSensitivity.setText(Integer.toString(mic.getSensitivity()));
+    }
+
+    private void fillDetailOfProduct(Consoles consoles) {
+        fillDetailOfProduct((Instrument) consoles);
+        textMaxPower.setText(Integer.toString(consoles.getMaxPower()));
+        textChannels.setText(Integer.toString(consoles.getChannels()));
+        textBitsOfProcessor.setText(Integer.toString(consoles.getBitsProcessor()));
+
+    }
 
     public void updateModifier() {
         setAllDisabled();
-        switch ((String) comboProductChooser.getValue()) {
+        switch (comboProductChooser.getValue()) {
             case "Service":
                 activateProduct();
                 activateService();
@@ -378,7 +417,7 @@ public class ModifierController {
 
             Product tmpProduct;
 
-            switch ((String) comboProductChooser.getValue()) {
+            switch (comboProductChooser.getValue()) {
                 case "Service":
                     int validatedDuration = Validation.stringToInt(textDuration.getText());
 
