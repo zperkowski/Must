@@ -16,6 +16,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,8 @@ public class MainController {
 
     @FXML
     MenuItem menuItemRemove;
+    @FXML
+    MenuItem fileEdit;
 
     @FXML
     Tab tabProducts;
@@ -47,6 +50,7 @@ public class MainController {
 
     // Product tab
     @FXML Label titleProduct;
+    @FXML Label discountedPrice;
     @FXML ImageView imageProduct;
     @FXML TextField textProductName;
     @FXML TextField textProductPrice;
@@ -57,8 +61,8 @@ public class MainController {
     @FXML TextField textProductGuarantee;
     @FXML CheckBox checkProductDigital;
     @FXML CheckBox checkProductIsSetComplete;
-    @FXML DatePicker dateDiscountStart;
-    @FXML DatePicker dateDiscountEnd;
+    @FXML TextField textDiscountStart;
+    @FXML TextField textDiscountEnd;
     @FXML TextField textProductDiscount;
     @FXML TextField textProductStrings;
     @FXML TextField textProductFrets;
@@ -90,6 +94,8 @@ public class MainController {
     @FXML TableColumn tableColModel;
     @FXML TableColumn tableColPrice;
     @FXML TableColumn tableColDuration;
+    @FXML TableColumn tableColDiscountStart;
+    @FXML TableColumn tableColDiscountEnd;
     @FXML TableColumn tableColDiscount;
     @FXML TableColumn tableColWeight;
     @FXML TableColumn tableColGuarantee;
@@ -182,71 +188,77 @@ public class MainController {
 
         // Set TableView
         tableColName.setCellValueFactory(
-                new PropertyValueFactory<Product,String>("name")
+                new PropertyValueFactory<Product, String>("name")
         );
-         tableColBrand.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("brand")
-         );
-         tableColModel.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("model")
-         );
-         tableColPrice.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("price")
-         );
-         tableColDuration.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("durationInHours")
-         );
-         tableColDiscount.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("discount")
-         );
-         tableColWeight.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("weight")
-         );
-         tableColGuarantee.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("guaranteeInMonths")
-         );
-         tableColDigital.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("guaranteeInMonths")
-         );
-         tableColStrings.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("strings")
-         );
-         tableColFrets.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("frets")
-         );
-         tableColType.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("type")
-         );
-         tableColKeys.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("keys")
-         );
-         tableColComplete.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("isSetComplete")
-         );
-         tableColMinBandwidth.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("minBandwidth")
-         );
-         tableColMaxBandwidth.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("maxBandwidth")
-         );
-         tableColRMS.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("rms")
-         );
-         tableColImpedance.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("impedance")
-         );
-         tableColSensitivity.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("sensitivity")
-         );
-         tableColMaxPower.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("maxPower")
-         );
-         tableColChannels.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("channels")
-         );
-         tableColBitsOfProcessor.setCellValueFactory(
-                 new PropertyValueFactory<Product,String>("bitsProcessor")
-         );
+        tableColBrand.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("brand")
+        );
+        tableColModel.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("model")
+        );
+        tableColPrice.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("price")
+        );
+        tableColDuration.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("durationInHours")
+        );
+        tableColDiscountStart.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("discountStart")
+        );
+        tableColDiscountEnd.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("discountEnd")
+        );
+        tableColDiscount.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("discount")
+        );
+        tableColWeight.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("weight")
+        );
+        tableColGuarantee.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("guaranteeInMonths")
+        );
+        tableColDigital.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("guaranteeInMonths")
+        );
+        tableColStrings.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("strings")
+        );
+        tableColFrets.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("frets")
+        );
+        tableColType.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("type")
+        );
+        tableColKeys.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("keys")
+        );
+        tableColComplete.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("isSetComplete")
+        );
+        tableColMinBandwidth.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("minBandwidth")
+        );
+        tableColMaxBandwidth.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("maxBandwidth")
+        );
+        tableColRMS.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("rms")
+        );
+        tableColImpedance.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("impedance")
+        );
+        tableColSensitivity.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("sensitivity")
+        );
+        tableColMaxPower.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("maxPower")
+        );
+        tableColChannels.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("channels")
+        );
+        tableColBitsOfProcessor.setCellValueFactory(
+                new PropertyValueFactory<Product, String>("bitsProcessor")
+        );
     }
 
     public void addProduct() {
@@ -291,10 +303,13 @@ public class MainController {
     }
 
     private void canBeRemoved(TreeItem<Product> newValue) {
-        if (newValue.getValue().getPrice() != null)
+        if (newValue.getValue().getPrice() != null) {
             menuItemRemove.setDisable(false);
-        else
+            fileEdit.setDisable(false);
+        } else {
             menuItemRemove.setDisable(true);
+            fileEdit.setDisable(true);
+        }
     }
 
     private void displayModifier() {
@@ -522,8 +537,13 @@ public class MainController {
     private void fillDetailOfProduct(Instrument product) {
         if (product.getPrice() != null) {
             fillDetailOfProduct( (Product) product);
+            if (product.getDiscount() > 0)
+                discountedPrice.setText("Discounted price: " +
+                    product.getPrice().multiply(new BigDecimal(product.getDiscount())).divide(new BigDecimal(100), 2));
             textProductBrand.setText(product.getBrand());
             textProductModel.setText(product.getModel());
+            textDiscountStart.setText(product.getDiscountStart().toString());
+            textDiscountEnd.setText(product.getDiscountEnd().toString());
             textProductDiscount.setText(Integer.toString(product.getDiscount()));
             textProductWeight.setText(Float.toString(product.getWeight()));
             textProductGuarantee.setText(Integer.toString(product.getGuaranteeInMonths()));

@@ -3,14 +3,15 @@ package com.zperkowski.Must;
 import javafx.scene.image.Image;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class Guitar extends Instrument {
     private int strings;
     private int frets;
     private String type;
 
-    public Guitar(String name, BigDecimal price, String description, Image image, int discount, float weight, String brand, String model, int guaranteeInMonths, boolean isDigital, int strings, int frets, String type) {
-        super(name, price, description, image, discount, weight, brand, model, guaranteeInMonths, isDigital);
+    public Guitar(String name, BigDecimal price, String description, Image image, LocalDate discountStart, LocalDate discountEnd, int discount, float weight, String brand, String model, int guaranteeInMonths, boolean isDigital, int strings, int frets, String type) {
+        super(name, price, description, image, discountStart, discountEnd, discount, weight, brand, model, guaranteeInMonths, isDigital);
         this.strings = strings;
         this.frets = frets;
         this.type = type;

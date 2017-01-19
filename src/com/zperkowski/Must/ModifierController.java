@@ -7,9 +7,11 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
  * A controller for the products modifier.
@@ -105,8 +107,39 @@ public class ModifierController {
                     break;
             }
 
-            updateModifier();
+        } else {
+            dateDiscountStart.setValue(LocalDate.now());
+            dateDiscountEnd.setValue(LocalDate.now().plusDays(1));
         }
+
+        final Callback<DatePicker, DateCell> dayCellFactory =
+                new Callback<DatePicker, DateCell>() {
+                    @Override
+                    public DateCell call(final DatePicker datePicker) {
+                        return new DateCell() {
+                            @Override
+                            public void updateItem(LocalDate item, boolean empty) {
+                                super.updateItem(item, empty);
+
+                                if (item.isBefore(
+                                        dateDiscountStart.getValue().plusDays(1))
+                                        ) {
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                            }
+                        };
+                    }
+                };
+        dateDiscountEnd.setDayCellFactory(dayCellFactory);
+
+        dateDiscountStart.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isAfter(dateDiscountEnd.getValue())) {
+                dateDiscountEnd.setValue(newValue.plusDays(1));
+            }
+        });
+
+        updateModifier();
 
         // int
         textDuration.textProperty().addListener(new ChangeListener<String>() {
@@ -285,6 +318,8 @@ public class ModifierController {
 
     private void fillDetailOfProduct(Instrument instrument) {
         fillDetailOfProduct((Product) instrument);
+        dateDiscountStart.setValue(instrument.getDiscountStart());
+        dateDiscountEnd.setValue(instrument.getDiscountEnd());
         textDiscount.setText(Integer.toString(instrument.getDiscount()));
         textWeight.setText(Float.toString(instrument.getWeight()));
         textBrand.setText(instrument.getBrand());
@@ -443,6 +478,8 @@ public class ModifierController {
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
+                                    dateDiscountStart.getValue(),
+                                    dateDiscountEnd.getValue(),
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -461,6 +498,8 @@ public class ModifierController {
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
+                                    dateDiscountStart.getValue(),
+                                    dateDiscountEnd.getValue(),
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -469,7 +508,7 @@ public class ModifierController {
                                     checkDigital.isSelected(),
                                     validatedStrings,
                                     validatedFrets,
-                                    comboType.getValue().toString());
+                                    comboType.getValue());
                     break;
                 case "Keyboard":
                     validatedDiscount = Validation.stringToInt(textDiscount.getText());
@@ -481,6 +520,8 @@ public class ModifierController {
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
+                                    dateDiscountStart.getValue(),
+                                    dateDiscountEnd.getValue(),
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -498,6 +539,8 @@ public class ModifierController {
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
+                                    dateDiscountStart.getValue(),
+                                    dateDiscountEnd.getValue(),
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -517,6 +560,8 @@ public class ModifierController {
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
+                                    dateDiscountStart.getValue(),
+                                    dateDiscountEnd.getValue(),
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -539,6 +584,8 @@ public class ModifierController {
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
+                                    dateDiscountStart.getValue(),
+                                    dateDiscountEnd.getValue(),
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -562,6 +609,8 @@ public class ModifierController {
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
+                                    dateDiscountStart.getValue(),
+                                    dateDiscountEnd.getValue(),
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -584,6 +633,8 @@ public class ModifierController {
                                     validatedPrice,
                                     textDescription.getText(),
                                     imageProduct,
+                                    dateDiscountStart.getValue(),
+                                    dateDiscountEnd.getValue(),
                                     validatedDiscount,
                                     validatedWeight,
                                     textBrand.getText(),
@@ -644,7 +695,6 @@ public class ModifierController {
 
         return isMissing;
     }
-    // TODO: Add DatePickers to setAllDisabled()
     /**
      * Sets all controls to disabled mode.
      */
@@ -686,6 +736,8 @@ public class ModifierController {
     }
 
     private void activateInstrument() {
+        dateDiscountStart.setDisable(false);
+        dateDiscountEnd.setDisable(false);
         textDiscount.setDisable(false);
         textWeight.setDisable(false);
         textBrand.setDisable(false);

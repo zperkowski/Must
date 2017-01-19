@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * <p>
@@ -46,6 +47,7 @@ public class Must extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Locale.setDefault(Locale.forLanguageTag("PL"));
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Music Store");
         primaryStage.setScene(new Scene(root));
