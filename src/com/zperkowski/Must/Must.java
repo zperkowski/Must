@@ -22,7 +22,7 @@ import java.util.Locale;
  * */
 public class Must extends Application {
 
-    static public ArrayList<Product> listOfProducts = new ArrayList<>();
+    static ArrayList<Product> listOfProducts = new ArrayList<>();
     static int indexOfSelectedItem = -1;
 
     /**

@@ -19,7 +19,7 @@
                 </Label>
             </children>
         </AnchorPane>
-        <VBox fx:id="modifierProductVBox">
+        <VBox>
             <children>
                 <GridPane alignment="CENTER" hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0">
                     <columnConstraints>
@@ -173,23 +173,22 @@
                 </GridPane>
                 <GridPane alignment="CENTER" hgap="5.0" vgap="5.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" />
-                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity"/>
+                        <ColumnConstraints hgrow="SOMETIMES"/>
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="125.0" minHeight="25.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="125.0" minHeight="25.0" prefHeight="71.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
-                    <children>
-                        <Label text="Description">
-                            <GridPane.margin>
-                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                            </GridPane.margin>
-                        </Label>
-                        <TextArea fx:id="textDescription" minHeight="50.0" prefHeight="100.0" scrollLeft="1.0" wrapText="true" GridPane.columnIndex="1" />
-                    </children>
                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                     </VBox.margin>
+                    <Label text="Description">
+                        <GridPane.margin>
+                            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                        </GridPane.margin>
+                    </Label>
+                    <TextArea fx:id="textDescription" minHeight="50.0" prefHeight="100.0" scrollLeft="1.0"
+                              wrapText="true" GridPane.columnIndex="1"/>
                 </GridPane>
             </children>
             <padding>

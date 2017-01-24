@@ -17,7 +17,7 @@ import java.time.LocalDate;
  * A controller for the products modifier.
  */
 public class ModifierController {
-    Image imageProduct;
+    private Image imageProduct;
 
     @FXML
     public Button buttonFinish;
@@ -90,7 +90,7 @@ public class ModifierController {
                     fillDetailOfProduct((Percussion) editingProduct);
                     break;
                 case "com.zperkowski.Must.SoundSystem":
-                    comboProductChooser.setValue("SoundSystem");
+                    comboProductChooser.setValue("Sound system");
                     fillDetailOfProduct((SoundSystem) editingProduct);
                     break;
                 case "com.zperkowski.Must.Speaker":
@@ -380,51 +380,33 @@ public class ModifierController {
         setAllDisabled();
         switch (comboProductChooser.getValue()) {
             case "Service":
-                activateProduct();
                 activateService();
                 break;
             case "Product":
                 activateProduct();
                 break;
             case "Instrument":
-                activateProduct();
                 activateInstrument();
                 break;
             case "Guitar":
-                activateProduct();
-                activateInstrument();
                 activateGuitar();
                 break;
             case "Keyboard":
-                activateProduct();
-                activateInstrument();
                 activateKeyboard();
                 break;
             case "Percussion":
-                activateProduct();
-                activateInstrument();
                 activatePercussion();
                 break;
             case "Sound system":
-                activateProduct();
-                activateInstrument();
                 activateSoundSystem();
                 break;
             case "Speakers":
-                activateProduct();
-                activateInstrument();
-                activateSoundSystem();
                 activateSpeaker();
                 break;
             case "Mic":
-                activateProduct();
-                activateInstrument();
-                activateSoundSystem();
                 activateMic();
                 break;
-            case "Console":
-                activateProduct();
-                activateInstrument();
+            case "Consoles":
                 activateConsoles();
                 break;
         }
@@ -649,11 +631,18 @@ public class ModifierController {
                     tmpProduct = new Product("Error", null, null, null);
             }
             // TODO: Create better way to decide between adding and editing
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             if (indexOfEditing > -1) {
                 Must.listOfProducts.remove(indexOfEditing);
                 Must.listOfProducts.add(indexOfEditing, tmpProduct);
-            } else
+                alert.setTitle("Item edited");
+                alert.setHeaderText("The item has been modified.");
+            } else {
                 Must.listOfProducts.add(tmpProduct);
+                alert.setTitle("Item added");
+                alert.setHeaderText("The item has been created.");
+            }
+            alert.show();
         }
     }
 
@@ -723,7 +712,6 @@ public class ModifierController {
         textBitsOfProcessor.setDisable(true);
         textDescription.setDisable(true);
     }
-    // TODO: Refactor like in MainController.fillDetailOfProduct
     // TODO: Add DatePickers to refactored activators
     private void activateProduct() {
         textName.setDisable(false);
@@ -732,10 +720,12 @@ public class ModifierController {
     }
 
     private void activateService() {
+        activateProduct();
         textDuration.setDisable(false);
     }
 
     private void activateInstrument() {
+        activateProduct();
         dateDiscountStart.setDisable(false);
         dateDiscountEnd.setDisable(false);
         textDiscount.setDisable(false);
@@ -747,34 +737,41 @@ public class ModifierController {
     }
 
     private void activateGuitar() {
+        activateInstrument();
         textStrings.setDisable(false);
         textFrets.setDisable(false);
         comboType.setDisable(false);
     }
 
     private void activateKeyboard() {
+        activateInstrument();
         textKeys.setDisable(false);
     }
 
     private void activatePercussion() {
+        activateInstrument();
         checkIsSetComplete.setDisable(false);
     }
 
     private void activateSoundSystem() {
+        activateInstrument();
         textMinBandwidth.setDisable(false);
         textMaxBandwidth.setDisable(false);
     }
 
     private void activateSpeaker() {
+        activateSoundSystem();
         textRMS.setDisable(false);
         textImpedance.setDisable(false);
     }
 
     private void activateMic() {
+        activateSoundSystem();
         textSensitivity.setDisable(false);
     }
 
     private void activateConsoles() {
+        activateInstrument();
         textMaxPower.setDisable(false);
         textChannels.setDisable(false);
         textBitsOfProcessor.setDisable(false);

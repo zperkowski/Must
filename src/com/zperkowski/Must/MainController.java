@@ -28,9 +28,9 @@ import java.util.Optional;
 public class MainController {
 
     @FXML
-    MenuItem menuItemRemove;
+    MenuItem menuItemEdit;
     @FXML
-    MenuItem fileEdit;
+    MenuItem menuItemRemove;
 
     @FXML
     Tab tabProducts;
@@ -135,6 +135,9 @@ public class MainController {
      */
     @FXML
     public void initialize() {
+        checkProductDigital.setStyle("-fx-opacity: 1");
+        checkProductIsSetComplete.setStyle("-fx-opacity: 1");
+
         initTreeProducts();
         initTreeServices();
 
@@ -305,10 +308,10 @@ public class MainController {
     private void canBeRemoved(TreeItem<Product> newValue) {
         if (newValue.getValue().getPrice() != null) {
             menuItemRemove.setDisable(false);
-            fileEdit.setDisable(false);
+            menuItemEdit.setDisable(false);
         } else {
             menuItemRemove.setDisable(true);
-            fileEdit.setDisable(true);
+            menuItemEdit.setDisable(true);
         }
     }
 
@@ -364,6 +367,7 @@ public class MainController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(".must", "*.must"));
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
+            newApp();
             try {
             ObjectInputStream inFile = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file.getAbsoluteFile())));
             Must.listOfProducts = (ArrayList) inFile.readObject();
@@ -408,7 +412,7 @@ public class MainController {
     }
 
     public void update() {
-        if (textSearch.getText().trim() == "") {
+        if (textSearch.getText().trim().equals("")) {
             updateTrees(Must.listOfProducts);
             updateTables(Must.listOfProducts);
         } else {
@@ -492,6 +496,7 @@ public class MainController {
     private void clearDetails() {
         // Products tab
         titleProduct.setText("");
+        discountedPrice.setText("");
         imageProduct.setImage(null);
         textProductName.setText("");
         textProductPrice.setText("");

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -13,9 +12,9 @@
         <menus>
           <Menu id="fileMenu" mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem disable="false" mnemonicParsing="false" onAction="#newApp" text="New" />
-                  <MenuItem disable="false" mnemonicParsing="false" onAction="#saveApp" text="Save..." />
-                  <MenuItem disable="false" mnemonicParsing="false" onAction="#openApp" text="Open..." />
+                  <MenuItem mnemonicParsing="false" onAction="#newApp" text="New" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveApp" text="Save..." />
+                  <MenuItem mnemonicParsing="false" onAction="#openApp" text="Open..." />
                   <SeparatorMenuItem disable="true" mnemonicParsing="false" />
               <MenuItem id="menuFileClose" mnemonicParsing="false" onAction="#closeApp" text="Close" />
             </items>
@@ -23,11 +22,11 @@
           <Menu fx:id="fileEdit" mnemonicParsing="false" text="Edit">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#addProduct" text="Add..." />
-                  <MenuItem mnemonicParsing="false" onAction="#editProduct" text="Edit..." />
-              <MenuItem id="menuEditDuplicate" disable="true" mnemonicParsing="false" text="Duplicate" />
+                  <MenuItem fx:id="menuItemEdit" disable="true" mnemonicParsing="false" onAction="#editProduct" text="Edit..." />
+                  <MenuItem id="menuEditDuplicate" disable="true" mnemonicParsing="false" text="Duplicate" />
                   <MenuItem fx:id="menuItemRemove" disable="true" mnemonicParsing="false" onAction="#removeProduct" text="Remove" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="updateList" mnemonicParsing="false" onAction="#update" text="Update list" />
+                  <MenuItem mnemonicParsing="false" onAction="#update" text="Update list" />
             </items>
           </Menu>
           <Menu id="fileHelp" mnemonicParsing="false" text="Help">
@@ -54,7 +53,7 @@
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fx:id="imageProduct" fitHeight="100.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                                     <Label fx:id="titleProduct" text="" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                     <Label fx:id="titleProduct" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                          <font>
                                              <Font size="31.0" />
                                          </font>
@@ -136,7 +135,7 @@
                                        <Label text="Channels" GridPane.rowIndex="10" />
                                        <TextField fx:id="textProductChannels" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                                        <Label text="Bits of processor" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                                       <TextField fx:id="textProductBitsOfProcessor" disable="true" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                                       <TextField fx:id="textProductBitsOfProcessor" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="10" />
                                     <TextField fx:id="textDiscountStart" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <TextField fx:id="textDiscountEnd" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                                    </children>
@@ -182,7 +181,7 @@
                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                    <children>
                                        <ImageView fx:id="imageService" fitHeight="100.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                                       <Label fx:id="titleService" text="" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                       <Label fx:id="titleService" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                            <font>
                                                <Font size="31.0" />
                                            </font>

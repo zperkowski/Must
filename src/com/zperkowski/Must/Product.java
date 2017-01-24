@@ -62,11 +62,13 @@ public class Product implements Serializable{
 
     private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
         s.defaultReadObject();
-        image = SwingFXUtils.toFXImage(ImageIO.read(s), null);
+        if (ImageIO.read(s) != null)
+            image = SwingFXUtils.toFXImage(ImageIO.read(s), null);
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
-        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "jpg", s);
+        if (image != null)
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "jpg", s);
     }
 }
