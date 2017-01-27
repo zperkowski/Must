@@ -52,7 +52,7 @@ public class ModifierController {
     private int indexOfEditing;
 
     /***
-     * Initializes proper input for certain fields and checks if should add or edit a Product
+     * Initializes proper input for certain fields and checks if the Modifier should add or edit a Product.
      */
     @FXML
     public void initialize() {
@@ -646,6 +646,10 @@ public class ModifierController {
         }
     }
 
+    /**
+     * Checks if is a missing information in required TextFields. Changes border of the TextField to red when something is missing.
+     * @return Returns true if one or more required TextFields are empty.
+     */
     private boolean isRequiredInformationMissing() {
         boolean isMissing = false;
         // Name
