@@ -343,6 +343,7 @@ public class MainController {
         itemConsoles.getChildren().clear();
     }
 
+    // TODO: Use XML for data and Base64 for images
     public void saveApp() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save as...");
@@ -360,6 +361,7 @@ public class MainController {
         }
     }
 
+    // TODO: Use XML for data and Base64 for images
     public void openApp() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open file");
