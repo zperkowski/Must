@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
- * A controller for the products modifier.
+ * A controller for the product modifier.
  */
 public class ModifierController {
     private Image imageProduct;
@@ -376,6 +376,9 @@ public class ModifierController {
 
     }
 
+    /**
+     * When the {@link #comboProductChooser} is changed to another value, activates the proper fields for the new values.
+     */
     public void updateModifier() {
         setAllDisabled();
         switch (comboProductChooser.getValue()) {
@@ -412,7 +415,12 @@ public class ModifierController {
         }
     }
 
-    // TODO: Refactor
+    /**
+     * Method adds or edits a product to the program.
+     *
+     * The method checks if there is missing information by {@link #isRequiredInformationMissing()} and then checks what kind of product should be created by checking {@link #comboProductChooser}.
+     * Adds a new product when {@link #indexOfEditing} is equal to -1. In another case replaces old product with the new one.
+     */
     public void doneButtonClicked() {
         if (!isRequiredInformationMissing()) {
             // Variables below have to be validated
@@ -647,7 +655,7 @@ public class ModifierController {
     }
 
     /**
-     * Checks if is a missing information in required TextFields. Changes border of the TextField to red when something is missing.
+     * Checks if there is missing information in the required TextFields. Changes the border of the TextField to red when something is missing.
      * @return Returns true if one or more required TextFields are empty.
      */
     private boolean isRequiredInformationMissing() {
@@ -688,6 +696,7 @@ public class ModifierController {
 
         return isMissing;
     }
+
     /**
      * Sets all controls to disabled mode.
      */
@@ -716,18 +725,27 @@ public class ModifierController {
         textBitsOfProcessor.setDisable(true);
         textDescription.setDisable(true);
     }
-    // TODO: Add DatePickers to refactored activators
+
+    /**
+     * Activates necessary fields on the layout.
+     */
     private void activateProduct() {
         textName.setDisable(false);
         textPrice.setDisable(false);
         textDescription.setDisable(false);
     }
 
+    /**
+     * Activates necessary fields on the layout.
+     */
     private void activateService() {
         activateProduct();
         textDuration.setDisable(false);
     }
 
+    /**
+     * Activates necessary fields on the layout.
+     */
     private void activateInstrument() {
         activateProduct();
         dateDiscountStart.setDisable(false);
@@ -740,6 +758,9 @@ public class ModifierController {
         checkDigital.setDisable(false);
     }
 
+    /**
+     * Activates necessary fields on the layout.
+     */
     private void activateGuitar() {
         activateInstrument();
         textStrings.setDisable(false);
@@ -747,33 +768,51 @@ public class ModifierController {
         comboType.setDisable(false);
     }
 
+    /**
+     * Activates necessary fields on the layout.
+     */
     private void activateKeyboard() {
         activateInstrument();
         textKeys.setDisable(false);
     }
 
+    /**
+     * Activates necessary fields on the layout.
+     */
     private void activatePercussion() {
         activateInstrument();
         checkIsSetComplete.setDisable(false);
     }
 
+    /**
+     * Activates necessary fields on the layout.
+     */
     private void activateSoundSystem() {
         activateInstrument();
         textMinBandwidth.setDisable(false);
         textMaxBandwidth.setDisable(false);
     }
 
+    /**
+     * Activates necessary fields on the layout.
+     */
     private void activateSpeaker() {
         activateSoundSystem();
         textRMS.setDisable(false);
         textImpedance.setDisable(false);
     }
 
+    /**
+     * Activates necessary fields on the layout.
+     */
     private void activateMic() {
         activateSoundSystem();
         textSensitivity.setDisable(false);
     }
 
+    /**
+     * Activates necessary fields on the layout.
+     */
     private void activateConsoles() {
         activateInstrument();
         textMaxPower.setDisable(false);
@@ -781,6 +820,9 @@ public class ModifierController {
         textBitsOfProcessor.setDisable(false);
     }
 
+    /**
+     * Calls {@link #openPictureDialog()} and changes text in the picture label when a picture has been chosen.
+     */
     public void buttonPictureClicked() {
         imageProduct = openPictureDialog();
         if (imageProduct != null)
@@ -788,8 +830,8 @@ public class ModifierController {
     }
 
     /**
-     * Opens a dialog to choose picture.
-     * @return Returns a Image of the chosen file.
+     * Opens a dialog to choose a picture.
+     * @return Returns an Image of the chosen file.
      */
     private Image openPictureDialog() {
         Image image;

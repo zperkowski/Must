@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * This class is a controller for the main window.
+ * This class is a controller of the main window.
  * The main window layout is set in main.fxml.
  */
 public class MainController {
@@ -86,7 +86,7 @@ public class MainController {
 
     // All tab
     /**
-     * Shows all objects of {@link Product} in a TableView.
+     * Shows all objects of {@link Product} in the TableView.
      * */
     @FXML TableView tableAll;
     @FXML TableColumn tableColName;
@@ -129,9 +129,9 @@ public class MainController {
     private TreeItem<Product> itemConsoles = new TreeItem<>(new Product("Consoles", null, null, null));
 
     /**
-     * Initializes two listeners for TreeView {@link #treeProducts} and {@link #treeServices}, connects appropriate columns in the TableView {@link #tableAll} to fields of a object of Product or a subclass.
+     * Initializes two listeners, one for TreeView {@link #treeProducts} and another for {@link #treeServices}, connects appropriate columns in the TableView {@link #tableAll} to fields of an object of the Product or a subclass.
      *
-     * When a item in TreeView treeProducts is selected, fills appropriate fields with a Product(or a subclass) details placed in the selected item.
+     * When an item in the TreeView {@link #treeProducts} is selected. The appropriate fields in the layout of the window are filled with the selected Product's(or a subclass's) details.
      */
     @FXML
     public void initialize() {
@@ -264,11 +264,21 @@ public class MainController {
         );
     }
 
+    /**
+     * Opens new window for adding a new product.
+     *
+     * {@see com.zperkowski.Must.ModifierController}
+     */
     public void addProduct() {
         Must.indexOfSelectedItem = -1;
         displayModifier();
     }
 
+    /**
+     * Finds selected item in the {@link #treeProducts} or in the {@link #treeServices} and opens a new window for editing.
+     *
+     * {@see com.zperkowski.Must.ModifierController}
+     */
     public void editProduct() {
         try {
             if (tabProducts.isSelected())
@@ -282,6 +292,9 @@ public class MainController {
         }
     }
 
+    /**
+     * When a product is selected, removes it from the {@link Must#listOfProducts}.
+     */
     public void removeProduct() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Remove a product");
@@ -305,6 +318,13 @@ public class MainController {
         }
     }
 
+    /**
+     * Checks if the selected TreeItem can be removed.
+     *
+     * Some TreeItems are set perpetually in the {@link #treeProducts} or in the {@link #treeServices}.
+     * When the item has no price, it cannot be removed.
+     * @param newValue The selected item.
+     */
     private void canBeRemoved(TreeItem<Product> newValue) {
         if (newValue.getValue().getPrice() != null) {
             menuItemRemove.setDisable(false);
@@ -315,6 +335,11 @@ public class MainController {
         }
     }
 
+    /**
+     * Creates a new window for adding or editing a product.
+     *
+     * {@see ModifierController}
+     */
     private void displayModifier() {
         try {
             Parent parentModifier = FXMLLoader.load(getClass().getResource("modifier.fxml"));
@@ -330,6 +355,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Clears the entire application.
+     */
     public void newApp() {
         Must.listOfProducts.clear();
         rootServices.getChildren().clear();
@@ -341,9 +369,13 @@ public class MainController {
         itemSpeakers.getChildren().clear();
         itemMics.getChildren().clear();
         itemConsoles.getChildren().clear();
+
+        tableAll.getItems().clear();
     }
 
-    // TODO: Use XML for data and Base64 for images
+    /**
+     * Asks user for a path and saves the {@link Must#listOfProducts} there.
+     */
     public void saveApp() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save as...");
@@ -361,6 +393,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Asks user for a path and loads a new {@link Must#listOfProducts} from there.
+     */
     // TODO: Use XML for data and Base64 for images
     public void openApp() {
         FileChooser fileChooser = new FileChooser();
@@ -383,14 +418,23 @@ public class MainController {
         update();
     }
 
+    /**
+     * Closes the application via a button in the menu.
+     */
     public void closeApp() {
         System.exit(0);
     }
 
+    /**
+     * Shows information about the program via a button in the menu.
+     */
     public void showAbout() {
         About.display();
     }
 
+    /**
+     * Initialises {@link #treeProducts} for the first use.
+     */
     private void initTreeProducts() {
         rootProducts.getChildren().addAll(
                 itemProducts,
@@ -408,11 +452,19 @@ public class MainController {
         treeProducts.setShowRoot(false);
     }
 
+    /**
+     * Initialises {@link #treeServices} for the first use.
+     */
     private void initTreeServices() {
         treeServices.setRoot(rootServices);
         rootServices.setExpanded(true);
     }
 
+    /**
+     * Checks if there is any test in the search field. If so, updates {@link #treeProducts}, {@link #treeServices} and {@link #tableAll}.
+     *
+     * When the method is called, the trees and table show products which names fit what is in the search field.
+     */
     public void update() {
         if (textSearch.getText().trim().equals("")) {
             updateTrees(Must.listOfProducts);
@@ -435,6 +487,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Clears all trees.
+     */
     private void clearTrees() {
         rootServices.getChildren().clear();
         itemProducts.getChildren().clear();
@@ -448,6 +503,11 @@ public class MainController {
         itemConsoles.getChildren().clear();
     }
 
+    /**
+     * Checks where every item comes from and puts it to the right place in the trees.
+     * {@see treeServices} {@see treeProducts}
+     * @param list A list of products, which have to be shown.
+     */
     private void updateTrees(List<Product> list) {
         clearTrees();
 
@@ -489,12 +549,19 @@ public class MainController {
         }
     }
 
+    /**
+     * Updates the {@link #tableAll} by the new list.
+     * @param list A list of the products, that have to be put into the table.
+     */
     private void updateTables(List<Product> list) {
         ObservableList<Product> observableList = FXCollections.observableArrayList();
         observableList.addAll(list);
         tableAll.setItems(observableList);
     }
 
+    /**
+     * Clears all fields in the layout of the controller.
+     */
     private void clearDetails() {
         // Products tab
         titleProduct.setText("");

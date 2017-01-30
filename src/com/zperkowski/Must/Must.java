@@ -26,9 +26,9 @@ public class Must extends Application {
     static int indexOfSelectedItem = -1;
 
     /**
-     * Method looks for the {@param product} in static listOfProducts and returns index of this {@param product} in the array.
+     * Method looks for a Product in the {@link #listOfProducts} and returns an index of this in the array.
      * @param product A Product you're looking for.
-     * @return Returns a index of the looking Product for. If the product doesn't exists in the list returns -1.
+     * @return Returns an index of the Product searched for. If the product doesn't exist in the list, it returns -1.
      */
     static int searchInListOfProducts(Product product) {
         for(Product item : listOfProducts){
@@ -41,10 +41,19 @@ public class Must extends Application {
         return -1;
     }
 
+    /**
+     * The main method.
+     * @param args - Arguments of the program.
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Starts main window of the program
+     * @param primaryStage The main stage of the program.
+     * @throws Exception Throws Exception. Why not?
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         Locale.setDefault(Locale.forLanguageTag("PL"));

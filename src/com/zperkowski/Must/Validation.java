@@ -6,7 +6,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 
 /**
- * Changes one format to another
+ * Changes one format to another.
  */
 class Validation {
     static BigDecimal stringToBigDecimal(String string) {
